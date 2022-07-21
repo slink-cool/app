@@ -28,10 +28,10 @@ const Sidebar = () => {
           <WalletButton />
         </div>
         <div className="flex flex-col">
-          <span className="text-secondary mb-4">Discover</span>
+          <span className="text-secondary mb-4 uppercase">Discover</span>
           <div className="flex flex-col px-5 text-primary">
             {discover.map(({ title, Icon }) => (
-              <div key={title} className="flex flex-row">
+              <div key={title} className="flex flex-row mb-6">
                 <Icon className="mr-3" />
                 <span>{title}</span>
               </div>
