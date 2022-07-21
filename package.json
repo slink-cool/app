@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@solana/wallet-adapter-base": "^0.9.9",
+    "@solana/wallet-adapter-phantom": "^0.9.7",
     "@solana/wallet-adapter-react": "^0.15.8",
     "@solana/wallet-adapter-react-ui": "^0.9.10",
-    "@solana/wallet-adapter-wallets": "^0.16.8",
     "@solana/web3.js": "^1.48.0",
     "@supabase/supabase-js": "^1.35.4",
     "next": "^12.2.2",
@@ -20,6 +20,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.2.2",
     "@svgr/webpack": "^6.3.0",
     "@types/node": "^18.0.6",
     "@types/react": "^18.0.15",

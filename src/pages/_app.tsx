@@ -5,7 +5,7 @@ import {
   ConnectionProvider,
   WalletProvider
 } from '@solana/wallet-adapter-react';
-import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
 import type { AppProps } from 'next/app';
 
 const solanaRpcUrl = 'http://localhost:8899';
