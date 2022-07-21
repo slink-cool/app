@@ -1,12 +1,12 @@
 import {
   WalletModalProvider,
-  WalletMultiButton
+  WalletMultiButton,
 } from '@solana/wallet-adapter-react-ui';
 
 const WalletButton = () => {
   return (
     <WalletModalProvider>
-      <WalletMultiButton />
+      <WalletMultiButton className="!w-full !bg-secondary" />
     </WalletModalProvider>
   );
 };
