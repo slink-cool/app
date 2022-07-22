@@ -46,7 +46,9 @@ const Sidebar = () => {
           <WalletButton />
         </div>
         <div className="flex flex-col">
-          <span className="text-secondary mb-4 uppercase font-bold">Discover</span>
+          <span className="text-secondary mb-4 uppercase font-bold text-sm">
+            Discover
+          </span>
           <div className="flex flex-col px-5 text-primary">
             {discover.map(({ title, Icon }) => (
               <div key={title} className="flex flex-row mb-6">
@@ -57,7 +59,9 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="flex flex-col">
-          <span className="text-secondary mb-4 uppercase font-bold">for you</span>
+          <span className="text-secondary mb-4 uppercase font-bold text-sm">
+            for you
+          </span>
           <div className="flex flex-col px-5 text-primary">
             {forYou.map(({ title, Icon }) => (
               <div key={title} className="flex flex-row mb-6">
