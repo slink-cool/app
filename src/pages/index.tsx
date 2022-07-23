@@ -5,6 +5,7 @@ import { Sidebar } from '@widgets/Sidebar';
 import type { NextPage } from 'next';
 import { parseCookies } from 'nookies';
 import { useEffect } from 'react';
+import jwt from 'jsonwebtoken';
 
 const Home: NextPage = (props) => {
   const wallet = useWallet();
@@ -14,10 +15,16 @@ const Home: NextPage = (props) => {
       if (!wallet.connected || !wallet.publicKey || !wallet.signMessage) return;
 
       const cookies = parseCookies();
-      const accessTokenCookie = cookies['sb-access-token'];
-      if (accessTokenCookie) {
-        supabase.auth.setAuth(accessTokenCookie);
-        return;
+      const accessToken = cookies['sb-access-token'];
+      if (accessToken) {
+        const jwtTokenParsed = jwt.decode(accessToken, { json: true });
+        if (
+          jwtTokenParsed &&
+          jwtTokenParsed.sub === wallet.publicKey.toBase58()
+        ) {
+          supabase.auth.setAuth(accessToken);
+          return;
+        }
       }
 
       WalletToken.new(wallet.publicKey, wallet.signMessage).then((jwt) => {
