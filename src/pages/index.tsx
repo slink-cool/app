@@ -1,45 +1,36 @@
-import { Token } from '@shared/auth-utils';
-import { supabase } from '@shared/supabaseClient';
+import { WalletToken } from '@shared/auth-utils';
+import { supabase } from '@shared/supabase';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Sidebar } from '@widgets/Sidebar';
 import type { NextPage } from 'next';
+import { parseCookies } from 'nookies';
 import { useEffect } from 'react';
 
 const Home: NextPage = (props) => {
   const wallet = useWallet();
 
-  useEffect(() => {
-    if (!wallet.connected || !wallet.publicKey || !wallet.signMessage) return;
+  useEffect(
+    function requestAccessToken() {
+      if (!wallet.connected || !wallet.publicKey || !wallet.signMessage) return;
 
-    Token.new(wallet.publicKey, wallet.signMessage).then((jwt) => {
-      fetch('/api/genToken', {
-        body: jwt.toString(),
-        method: 'POST',
-      })
-        .then((res) => res.text())
-        .then((token) => {
-          return supabase.auth.setAuth(token);
-        });
-    });
-  }, [wallet]);
+      const cookies = parseCookies();
+      const accessTokenCookie = cookies['sb-access-token'];
+      if (accessTokenCookie) {
+        supabase.auth.setAuth(accessTokenCookie);
+        return;
+      }
 
-  useEffect(() => {
-    const sub = supabase.auth.onAuthStateChange((ev, sess) => {
-      console.log('test');
-
-      supabase
-        .from('user')
-        .select()
-        .eq('id', 'FnUaaRXXAdV1Y4RHD2k9BUwRXBtHuyTWrMK6HHtqKaEq')
-        .then((res) => console.log(res));
-      supabase
-        .from('user')
-        .update({ test: '2228' })
-        .eq('id', wallet.publicKey?.toString())
-        .then((res) => console.log(res));
-    });
-    return () => sub.data?.unsubscribe();
-  }, [wallet.publicKey]);
+      WalletToken.new(wallet.publicKey, wallet.signMessage).then((jwt) => {
+        fetch('/api/auth/access-token', {
+          body: jwt.toString(),
+          method: 'POST',
+        })
+          .then((res) => res.json())
+          .then(({ token }) => supabase.auth.setAuth(token));
+      });
+    },
+    [wallet]
+  );
 
   return (
     <div className="flex flex-row">

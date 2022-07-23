@@ -6,7 +6,7 @@ import {
   bytesToBase64,
   jsonParseFromBase64,
   jsonStringifyToBase64,
-  strToBytes,
+  strToBytes
 } from './encode-utils';
 
 interface TokenHeader {
@@ -20,7 +20,7 @@ interface TokenBody {
   exp: number;
 }
 
-export class Token {
+export class WalletToken {
   constructor(
     readonly header: TokenHeader,
     readonly body: TokenBody,
@@ -33,7 +33,7 @@ export class Token {
   static async new(
     publicKey: PublicKey,
     signMessage: MessageSignerWalletAdapterProps['signMessage']
-  ): Promise<Token> {
+  ): Promise<WalletToken> {
     const nowUtcSeconds = new Date().getTime() / 1000;
 
     const header = {
@@ -41,12 +41,12 @@ export class Token {
       alg: 'ed25519',
     };
 
-    const ttlMs = 1 * 60 * 60 * 1000; // 1h
+    const ttlSec = 1 * 60 * 60; // 1h
 
     const body = {
       sub: publicKey.toBase58(),
       iat: Math.round(nowUtcSeconds),
-      exp: Math.round(nowUtcSeconds + ttlMs / 1000),
+      exp: Math.round(nowUtcSeconds + ttlSec),
     };
 
     const headerB64 = jsonStringifyToBase64(header);
@@ -56,7 +56,7 @@ export class Token {
 
     const signature = await signMessage(strToBytes(payload));
 
-    return new Token(
+    return new WalletToken(
       header,
       body,
       signature,
@@ -69,7 +69,7 @@ export class Token {
   static parse(jwt: string) {
     const [header, body, signature] = jwt.split('.');
 
-    const token = new Token(
+    const token = new WalletToken(
       jsonParseFromBase64(header),
       jsonParseFromBase64(body),
       bytesFromBase64(signature),
