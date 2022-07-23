@@ -1,11 +1,45 @@
+import { Token } from '@shared/auth-utils';
 import { supabase } from '@shared/supabaseClient';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Sidebar } from '@widgets/Sidebar';
-import type { GetServerSideProps, NextPage } from 'next';
-import { useCallback } from 'react';
+import type { NextPage } from 'next';
+import { useEffect } from 'react';
 
 const Home: NextPage = (props) => {
   const wallet = useWallet();
+
+  useEffect(() => {
+    if (!wallet.connected || !wallet.publicKey || !wallet.signMessage) return;
+
+    Token.new(wallet.publicKey, wallet.signMessage).then((jwt) => {
+      fetch('/api/genToken', {
+        body: jwt.toString(),
+        method: 'POST',
+      })
+        .then((res) => res.text())
+        .then((token) => {
+          return supabase.auth.setAuth(token);
+        });
+    });
+  }, [wallet]);
+
+  useEffect(() => {
+    const sub = supabase.auth.onAuthStateChange((ev, sess) => {
+      console.log('test');
+
+      supabase
+        .from('user')
+        .select()
+        .eq('id', 'FnUaaRXXAdV1Y4RHD2k9BUwRXBtHuyTWrMK6HHtqKaEq')
+        .then((res) => console.log(res));
+      supabase
+        .from('user')
+        .update({ test: '2228' })
+        .eq('id', wallet.publicKey?.toString())
+        .then((res) => console.log(res));
+    });
+    return () => sub.data?.unsubscribe();
+  }, [wallet.publicKey]);
 
   return (
     <div className="flex flex-row">
