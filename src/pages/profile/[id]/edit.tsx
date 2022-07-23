@@ -1,6 +1,7 @@
 import { Avatar } from '@entities/profile';
 import { Tab } from '@headlessui/react';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
+import { Button, TextInput } from '@shared/ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { NextPage } from 'next';
@@ -25,7 +26,7 @@ const ProfileEditPage: NextPage = () => {
         </a>
       </div>
       <Tab.Group>
-        <Tab.List className="flex w-full flex-row space-x-6">
+        <Tab.List className="mb-6 flex w-full flex-row space-x-6">
           <Tab
             className={({ selected }) =>
               `flex flex-1 border-b-2 ${
@@ -47,16 +48,27 @@ const ProfileEditPage: NextPage = () => {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            <div className="col-span-8 mt-8 mb-10 h-[348px] overflow-hidden rounded-xl bg-primary">
-              <div className="h-1/2 bg-[#D3EDFF]" />
-              <div className="px-6">
-                <div className="-mt-16 mb-2">
+            <div className="col-span-8 flex flex-col overflow-hidden rounded-xl bg-primary">
+              <div className=" h-44 bg-[#D3EDFF]" />
+              <div className="border-b border-b-dark-300 px-6">
+                <div className="-mt-16 mb-6">
                   <Avatar pk={profilePK} />
                 </div>
-                <span>{profileId}</span>
+                <div className="mb-6">
+                  <TextInput
+                    title="Display name"
+                    placeholder="Enter display name"
+                  />
+                </div>
+                <div className="mb-6">
+                  <TextInput title="Short name" placeholder="e.g. @delink" />
+                </div>
+              </div>
+              <div className="flex flex-1 justify-between p-6">
+                <Button title="Cancel" kind="secondary" />
+                <Button title="Save" />
               </div>
             </div>
-            <div className="h-[200px] grid-cols-8 overflow-hidden rounded-xl bg-primary"></div>
           </Tab.Panel>
           <Tab.Panel></Tab.Panel>
         </Tab.Panels>

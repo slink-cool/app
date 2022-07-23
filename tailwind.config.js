@@ -29,7 +29,13 @@ module.exports = {
         primary: '#958E9E',
         secondary: '#605A69',
       },
+      // fontSize: {
+      //   xxs: ['0.625rem', '0.75rem'],
+      //   xs: ['0.75rem', '0.875rem'],
+      //   sm: ['0.875rem', '1rem'],
+      //   base: ['1rem', '1rem'],
+      // },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };
