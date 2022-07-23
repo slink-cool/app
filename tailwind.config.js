@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Raleway', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         light: {
           500: '#FFFFFF',
@@ -14,6 +19,7 @@ module.exports = {
           400: '#201D24',
           300: '#2C2830',
         },
+        accent: '#0094FF',
       },
       backgroundColor: {
         primary: '#201D24',
@@ -22,7 +28,6 @@ module.exports = {
       textColor: {
         primary: '#958E9E',
         secondary: '#605A69',
-        accent: '#0094FF'
       },
     },
   },

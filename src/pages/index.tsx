@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (!wallet.connected || !wallet.publicKey) return;
 
-    router.push({
+    router.replace({
       pathname: '/profile/[id]',
       query: { id: wallet.publicKey.toString() },
     });

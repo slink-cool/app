@@ -43,7 +43,7 @@ function App({ Component, pageProps }: AppProps) {
   }, [wallet]);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row bg-[#16131A] text-white">
       <Sidebar />
       <main className="container grid-cols-8 px-24">
         <Component {...pageProps} />
