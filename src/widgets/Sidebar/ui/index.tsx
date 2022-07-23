@@ -6,6 +6,7 @@ import ExternalLinkOutline from '@shared/icons/ExternalLinkOutline.svg';
 import Logo from '@shared/icons/Logo.svg';
 import NewspaperOutline from '@shared/icons/NewspaperOutline.svg';
 import PlusCircleOutline from '@shared/icons/PlusCircleOutline.svg';
+import Link from 'next/link';
 
 const discover = [
   { Icon: ViewGridOutline, title: 'DAOs' },
@@ -36,22 +37,24 @@ const forYou = [
 
 const Sidebar = () => {
   return (
-    <div className="w-80 bg-primary h-screen">
+    <div className="h-screen w-80 bg-primary">
       <div className="flex flex-col py-8 px-6">
-        <div className="flex flex-row items-center mb-8">
-          <Logo className="mr-2" />
-          <span className="text-2xl font-bold">delink</span>
-        </div>
+        <Link href="/">
+          <button className="mb-8 flex flex-row items-center">
+            <Logo className="mr-2" />
+            <span className="text-2xl font-bold">delink</span>
+          </button>
+        </Link>
         <div className="mb-12">
           <WalletButton />
         </div>
         <div className="flex flex-col">
-          <span className="text-secondary mb-4 uppercase font-bold text-sm">
+          <span className="mb-4 text-sm font-bold uppercase text-secondary">
             Discover
           </span>
           <div className="flex flex-col px-5 text-primary">
             {discover.map(({ title, Icon }) => (
-              <div key={title} className="flex flex-row mb-6">
+              <div key={title} className="mb-6 flex flex-row">
                 <Icon className="mr-3" />
                 <span className="font-bold">{title}</span>
               </div>
@@ -59,12 +62,12 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="flex flex-col">
-          <span className="text-secondary mb-4 uppercase font-bold text-sm">
+          <span className="mb-4 text-sm font-bold uppercase text-secondary">
             for you
           </span>
           <div className="flex flex-col px-5 text-primary">
             {forYou.map(({ title, Icon }) => (
-              <div key={title} className="flex flex-row mb-6">
+              <div key={title} className="mb-6 flex flex-row">
                 <Icon className="mr-3" />
                 <span className="font-bold">{title}</span>
               </div>

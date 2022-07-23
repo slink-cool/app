@@ -18,8 +18,8 @@ export default async function handler(
     res.status(405);
     return;
   }
-  const strToken = req.body as string;
-  const token = WalletToken.parse(strToken);
+  const { token: tokenStr } = req.body;
+  const token = WalletToken.parse(tokenStr);
 
   if (!token.isValid()) {
     res.status(403);

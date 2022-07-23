@@ -17,6 +17,7 @@
     "baseUrl": "src",
     "paths": {
       "@entities/*": ["entities/*"],
+      "@features/*": ["features/*"],
       "@widgets/*": ["widgets/*"],
       "@pages/*": ["pages/*"],
       "@shared/*": ["shared/*"]

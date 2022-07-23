@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@solana/wallet-adapter-base": "^0.9.9",
     "@solana/wallet-adapter-phantom": "^0.9.7",
     "@solana/wallet-adapter-react": "^0.15.8",
@@ -17,6 +18,7 @@
     "@supabase/supabase-js": "^1.35.4",
     "bs58": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
+    "ky": "^0.31.1",
     "next": "^12.2.2",
     "nookies": "^2.5.2",
     "react": "^18.2.0",

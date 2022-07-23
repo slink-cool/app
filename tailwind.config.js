@@ -22,6 +22,7 @@ module.exports = {
       textColor: {
         primary: '#958E9E',
         secondary: '#605A69',
+        accent: '#0094FF'
       },
     },
   },
