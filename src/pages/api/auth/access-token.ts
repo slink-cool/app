@@ -26,7 +26,7 @@ export default async function handler(
     return;
   }
 
-  await supabase.from('user').upsert({ id: token.body.sub });
+  await supabase.from('user').upsert({ id: token.body.sub }).throwOnError();
 
   const nowUtcSec = Math.round(new Date().getTime() / 1000);
   const ttlSec = 1 * 60 * 60; // 1h
