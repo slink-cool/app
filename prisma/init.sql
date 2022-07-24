@@ -28,38 +28,10 @@ alter role authenticated set statement_timeout = '8s';
 drop extension if exists pg_graphql;
 
 -- create auth.sub()
-create function auth.sub() returns text as
+create or replace function auth.sub() returns text as
 $$
 select coalesce(
                nullif(current_setting('request.jwt.claim.sub', true), ''),
                (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub')
            )::text;
 $$ language sql;
-
--- CreateTable
-CREATE TABLE "user"
-(
-    "id"           TEXT         NOT NULL,
-    "created_at"   TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "display_name" TEXT,
-    "short_name"   TEXT,
-
-    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
-);
-
-alter table "user"
-    enable row level security;
-
-CREATE POLICY "read_all"
-    ON "user"
-    FOR SELECT USING (
-    true
-    );
-
-CREATE POLICY "update_only_self"
-    ON "user"
-    FOR UPDATE USING (
-    auth.sub() = id
-    ) WITH CHECK (
-    auth.sub() = id
-    );

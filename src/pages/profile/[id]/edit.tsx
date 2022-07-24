@@ -5,6 +5,7 @@ import {
   UserInfo,
 } from '@entities/user';
 import { IntroForm } from '@features/profile-edit';
+import SkillsForm from '@features/profile-edit/ui/SkillsForm';
 import { Tab } from '@headlessui/react';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import ArrowLeft from '@shared/icons/ArrowLeft.svg';
@@ -82,7 +83,9 @@ const ProfileEditPage: NextPage = () => {
               />
             )}
           </Tab.Panel>
-          <Tab.Panel></Tab.Panel>
+          <Tab.Panel>
+            <SkillsForm onCancel={() => {}} onSave={() => {}} />
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </div>

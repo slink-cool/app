@@ -44,6 +44,7 @@ const IntroForm = ({
         </div>
         <div className="mb-6">
           <TextInput
+            id="display-name"
             title="Display name"
             placeholder="Enter display name"
             value={displayName}
@@ -52,6 +53,7 @@ const IntroForm = ({
         </div>
         <div className="mb-6">
           <TextInput
+            id="short-name"
             title="Short name"
             placeholder="e.g. @delink"
             value={shortName}
