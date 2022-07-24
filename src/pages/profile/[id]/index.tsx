@@ -1,5 +1,5 @@
 import { Avatar } from '@entities/profile';
-import { fetchUserInfo, UserInfo } from '@entities/user';
+import { fetchUserInfo, SWR_USER_KEY, UserInfo } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import EditIcon from '@shared/icons/Edit.svg';
 import { displayPublicKey } from '@shared/ui';
@@ -8,8 +8,9 @@ import { PublicKey } from '@solana/web3.js';
 import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-const ProfilePage: NextPage<{ userInfo: UserInfo }> = ({ userInfo }) => {
+const ProfilePage: NextPage = () => {
   const { query } = useRouter();
 
   const profileId = (query.id as string) || DEFAULT_PUBLIC_KEY_STR;
@@ -19,6 +20,11 @@ const ProfilePage: NextPage<{ userInfo: UserInfo }> = ({ userInfo }) => {
 
   const walletPublicKey = wallet.publicKey || PublicKey.default;
   const isOwner = walletPublicKey.equals(profilePK);
+
+  const { data: userInfo, isLoading: isLoadingUserInfo } = useSWR(
+    [SWR_USER_KEY, profileId],
+    ([_, profileId]) => fetchUserInfo(profileId)
+  );
 
   return (
     <>
@@ -39,30 +45,25 @@ const ProfilePage: NextPage<{ userInfo: UserInfo }> = ({ userInfo }) => {
             </div>
           )}
         </div>
-        <div className="px-6">
+        <div className="flex flex-col px-6">
           <div className="-mt-16 mb-2">
-            <Avatar pk={profilePK} />
+            <Avatar publicKey={profilePK} />
           </div>
-          <div className="text-xl font-bold">
+          <span className="mb-2 text-xl font-bold">
             {userInfo?.displayName
               ? userInfo?.displayName
               : displayPublicKey(profileId)}
-          </div>
+          </span>
+          {userInfo?.displayName && (
+            <span className="text-sm text-light-300">
+              {displayPublicKey(profileId)}
+            </span>
+          )}
         </div>
       </div>
       <div className="h-[200px] grid-cols-8 overflow-hidden rounded-xl bg-primary"></div>
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const id = ctx.query.id;
-  const userInfo = await fetchUserInfo(id as string);
-  return {
-    props: {
-      userInfo,
-    },
-  };
 };
 
 export default ProfilePage;

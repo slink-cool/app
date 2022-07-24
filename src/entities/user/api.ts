@@ -1,4 +1,4 @@
-import { EMPTY_ARR } from '@shared/defaults';
+import { EMPTY_OBJ } from '@shared/defaults';
 import { supabase } from '@shared/supabase';
 
 export const SWR_USER_KEY = 'user';
@@ -9,14 +9,17 @@ export interface UserInfo {
 }
 
 export async function fetchUserInfo(id: string): Promise<UserInfo> {
+  console.log('fetch');
   const { data } = await supabase
     .from('user')
     .select('display_name, short_name')
     .eq('id', id)
     .throwOnError()
-    .single();
+    .maybeSingle();
 
-  return { displayName: data.display_name, shortName: data.short_name };
+  const { display_name = null, short_name = null } = data || EMPTY_OBJ;
+
+  return { displayName: display_name, shortName: short_name };
 }
 
 export async function updateUserInfo(

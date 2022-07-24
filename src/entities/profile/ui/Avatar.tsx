@@ -1,13 +1,13 @@
 import { PublicKey } from '@solana/web3.js';
 
 interface AvatarProps {
-  pk: PublicKey;
+  publicKey: PublicKey | string;
 }
 
-const Avatar = ({ pk }: AvatarProps) => {
+const Avatar = ({ publicKey }: AvatarProps) => {
   return (
     <div className="flex aspect-square w-32 items-center justify-center rounded-full border-4 border-[#201D24] bg-[#D3EDFF]">
-      <span className="text-6xl text-[#819CAF]">{pk.toString()[0]}</span>
+      <span className="text-6xl text-[#819CAF]">{publicKey.toString()[0]}</span>
     </div>
   );
 };

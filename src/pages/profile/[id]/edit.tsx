@@ -1,49 +1,37 @@
-import { Avatar } from '@entities/profile';
 import {
   fetchUserInfo,
   SWR_USER_KEY,
   updateUserInfo,
   UserInfo,
 } from '@entities/user';
+import { IntroForm } from '@features/profile-edit';
 import { Tab } from '@headlessui/react';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
-import { Button, TextInput } from '@shared/ui';
+import ArrowLeft from '@shared/icons/ArrowLeft.svg';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-const ProfileEditPage: NextPage<{ userInfo: UserInfo }> = ({ userInfo }) => {
+const ProfileEditPage: NextPage = () => {
   const router = useRouter();
 
   const { id } = router.query;
   const profileId: string = (id as string) || DEFAULT_PUBLIC_KEY_STR;
   const profilePK = new PublicKey(profileId);
 
-  const { data } = useSWR(
+  const { data: userInfo, isLoading: isLoadingUserInfo } = useSWR(
     [SWR_USER_KEY, profileId],
-    ([_, profileId]) => fetchUserInfo(profileId),
-    { fallbackData: userInfo }
+    ([_, profileId]) => fetchUserInfo(profileId)
   );
 
-  const { trigger } = useSWRMutation(
+  const { trigger: saveUserInfo } = useSWRMutation(
     [SWR_USER_KEY, profileId],
-    ([_, profileId], { arg }) => updateUserInfo(profileId, arg)
+    ([_, profileId], { arg }: { arg: UserInfo }) =>
+      updateUserInfo(profileId, arg)
   );
-
-  const [displayName, setDisplayName] = useState<string>(
-    data?.displayName || ''
-  );
-
-  const [shortName, setShortName] = useState<string>(data?.shortName || '');
-
-  const onSave = () => {
-    trigger({ displayName });
-    router.back();
-  };
 
   const wallet = useWallet();
 
@@ -52,10 +40,12 @@ const ProfileEditPage: NextPage<{ userInfo: UserInfo }> = ({ userInfo }) => {
 
   return (
     <div className="pt-8">
-      <div className="mb-6 cursor-pointer">
-        <a onClick={router.back} className="text-sm text-light-300">
-          Back to profile
-        </a>
+      <div
+        className="mb-6 flex cursor-pointer flex-row items-center text-sm text-light-300"
+        onClick={router.back}
+      >
+        <ArrowLeft />
+        Back to profile
       </div>
       <Tab.Group>
         <Tab.List className="mb-6 flex w-full flex-row space-x-6">
@@ -80,50 +70,23 @@ const ProfileEditPage: NextPage<{ userInfo: UserInfo }> = ({ userInfo }) => {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            <div className="col-span-8 flex flex-col overflow-hidden rounded-xl bg-primary">
-              <div className=" h-44 bg-[#D3EDFF]" />
-              <div className="border-b border-b-dark-300 px-6">
-                <div className="-mt-16 mb-6">
-                  <Avatar pk={profilePK} />
-                </div>
-                <div className="mb-6">
-                  <TextInput
-                    title="Display name"
-                    placeholder="Enter display name"
-                    value={displayName}
-                    onTextChange={setDisplayName}
-                  />
-                </div>
-                <div className="mb-6">
-                  <TextInput
-                    title="Short name"
-                    placeholder="e.g. @delink"
-                    value={shortName}
-                    onTextChange={setShortName}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-1 justify-between p-6">
-                <Button title="Cancel" kind="secondary" />
-                <Button title="Save" onClick={onSave} />
-              </div>
-            </div>
+            {isLoadingUserInfo ? null : (
+              <IntroForm
+                userInfo={userInfo!}
+                onCancel={() => {
+                  router.back();
+                }}
+                onSave={(info) => {
+                  saveUserInfo(info);
+                }}
+              />
+            )}
           </Tab.Panel>
           <Tab.Panel></Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const id = ctx.query.id;
-  const userInfo = await fetchUserInfo(id as string);
-  return {
-    props: {
-      userInfo,
-    },
-  };
 };
 
 export default ProfileEditPage;
