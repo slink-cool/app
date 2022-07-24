@@ -26,7 +26,6 @@ alter role authenticated set statement_timeout = '8s';
 
 -- disable graphql
 drop extension if exists pg_graphql;
-drop schema if exists graphql_public cascade;
 
 -- create auth.sub()
 create function auth.sub() returns text as
