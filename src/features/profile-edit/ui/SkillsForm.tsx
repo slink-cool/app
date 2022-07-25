@@ -25,15 +25,23 @@ const SkillsForm = ({ onCancel, onSave }: SkillsFormProps) => {
             id="skill-input"
             value={skill}
             onTextChange={setSkill}
-            placeholder="enter skill"
+            placeholder="e.g. type “Product Design” and press enter"
             onEnterPress={onSkillEnter}
           />
         </div>
       </div>
-      <div className="flex flex-col divide-y divide-dark-300 border-y border-dark-300 px-6 text-sm font-semibold">
+      <div className="flex flex-col divide-y divide-dark-300 border-y border-dark-300 px-6 text-sm">
         {skills.map((skill, idx) => (
-          <div key={idx} className="py-4">
-            {skill}
+          <div key={idx} className="flex justify-between py-4">
+            <span className="font-semibold">{skill}</span>
+            <button
+              className="font-medium text-light-300"
+              onClick={() =>
+                setSkills((prev) => prev.filter((it) => it !== skill))
+              }
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
