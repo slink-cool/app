@@ -19,8 +19,8 @@ const SkillsForm = ({ onCancel, onSave }: SkillsFormProps) => {
 
   return (
     <div className="col-span-8 flex flex-col overflow-hidden rounded-xl bg-primary">
-      <div className="border-b border-b-dark-300 p-6">
-        <div className="mb-6 max-w-xs">
+      <div className="p-6">
+        <div className="max-w-xs">
           <TextInput
             id="skill-input"
             value={skill}
@@ -30,12 +30,12 @@ const SkillsForm = ({ onCancel, onSave }: SkillsFormProps) => {
           />
         </div>
       </div>
-      <div className="flex flex-col divide-y divide-dark-300 border-y border-dark-300 px-6 text-sm">
+      <div className="flex flex-col divide-y divide-dark-300 border-y border-y-dark-300 px-6">
         {skills.map((skill, idx) => (
           <div key={idx} className="flex justify-between py-4">
-            <span className="font-semibold">{skill}</span>
+            <span className="text-label-semibold">{skill}</span>
             <button
-              className="font-medium text-light-300"
+              className="text-caption text-light-300"
               onClick={() =>
                 setSkills((prev) => prev.filter((it) => it !== skill))
               }
