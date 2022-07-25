@@ -1,8 +1,8 @@
 import { WalletToken } from '@shared/auth-utils';
 import { supabase } from '@shared/supabase';
-import jwt from 'jsonwebtoken';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { setCookie } from 'nookies';
+import { SignJWT } from 'jose';
 
 interface AuthResponse {
   token: string;
@@ -31,10 +31,12 @@ export default async function handler(
   const nowUtcSec = Math.round(new Date().getTime() / 1000);
   const ttlSec = 1 * 60 * 60; // 1h
 
-  const accessToken = jwt.sign(
-    { role: 'authenticated', sub: token.body.sub, exp: nowUtcSec + ttlSec },
-    JWT_SECRET
-  );
+  const accessToken = await new SignJWT({ role: 'authenticated' })
+    .setSubject(token.body.sub)
+    .setExpirationTime(nowUtcSec + ttlSec)
+    .setIssuedAt()
+    .setProtectedHeader({ typ: 'JWT', alg: 'HS256' })
+    .sign(Buffer.from(JWT_SECRET));
 
   setCookie({ res }, 'sb-access-token', accessToken, {
     // httpOnly: true,

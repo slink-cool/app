@@ -1,20 +1,20 @@
 import '@solana/wallet-adapter-react-ui/styles.css';
 import '../styles/globals.css';
 
+import { requestAccessToken } from '@features/auth/api';
+import { WalletToken } from '@shared/auth-utils';
 import { supabase } from '@shared/supabase';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
 import {
   ConnectionProvider,
   useWallet,
-  WalletProvider,
+  WalletProvider
 } from '@solana/wallet-adapter-react';
 import { Sidebar } from '@widgets/Sidebar';
-import jwt from 'jsonwebtoken';
+import { decodeJwt } from 'jose';
 import type { AppProps } from 'next/app';
 import { parseCookies } from 'nookies';
 import { useEffect } from 'react';
-import { WalletToken } from '@shared/auth-utils';
-import { requestAccessToken } from '@features/auth/api';
 
 function App({ Component, pageProps }: AppProps) {
   const wallet = useWallet();
@@ -25,7 +25,7 @@ function App({ Component, pageProps }: AppProps) {
     const cookies = parseCookies();
     const accessToken = cookies['sb-access-token'];
     if (accessToken) {
-      const jwtTokenParsed = jwt.decode(accessToken, { json: true });
+      const jwtTokenParsed = decodeJwt(accessToken);
       if (
         jwtTokenParsed &&
         jwtTokenParsed.sub === wallet.publicKey.toBase58()

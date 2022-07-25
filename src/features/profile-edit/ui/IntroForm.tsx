@@ -5,7 +5,7 @@ import { useCallback, useState } from 'react';
 import CameraIcon from '@shared/icons/Camera.svg';
 
 interface IntroFormProps {
-  userInfo: UserInfo;
+  userInfo: UserInfo | null;
   onCancel: () => void;
   onSave: (userInfo: UserInfo) => void;
 }
@@ -16,10 +16,10 @@ const IntroForm = ({
   onSave: onSaveCallback,
 }: IntroFormProps) => {
   const [displayName, setDisplayName] = useState<string>(
-    userInfo.displayName || ''
+    userInfo?.displayName || ''
   );
 
-  const [shortName, setShortName] = useState<string>(userInfo.shortName || '');
+  const [shortName, setShortName] = useState<string>(userInfo?.shortName || '');
 
   const onSave = () => {
     onSaveCallback({ displayName, shortName });

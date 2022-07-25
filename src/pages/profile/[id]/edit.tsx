@@ -23,7 +23,7 @@ const ProfileEditPage: NextPage = () => {
   const profileId: string = (id as string) || DEFAULT_PUBLIC_KEY_STR;
   const profilePK = new PublicKey(profileId);
 
-  const { data: userInfo, isLoading: isLoadingUserInfo } = useSWR(
+  const { data: userInfo = null, isLoading: isLoadingUserInfo } = useSWR(
     [SWR_USER_KEY, profileId],
     ([_, profileId]) => fetchUserInfo(profileId)
   );
@@ -73,7 +73,7 @@ const ProfileEditPage: NextPage = () => {
           <Tab.Panel>
             {isLoadingUserInfo ? null : (
               <IntroForm
-                userInfo={userInfo!}
+                userInfo={userInfo}
                 onCancel={() => {
                   router.back();
                 }}

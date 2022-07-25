@@ -9,7 +9,6 @@ export interface UserInfo {
 }
 
 export async function fetchUserInfo(id: string): Promise<UserInfo> {
-  console.log('fetch');
   const { data } = await supabase
     .from('user')
     .select('display_name, short_name')
