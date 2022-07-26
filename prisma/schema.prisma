@@ -56,9 +56,10 @@ model Holder {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  dao    Dao    @relation(fields: [daoId], references: [id])
-  daoId  String @map("dao_id")
-  amount BigInt @default(0) @map("amount")
+  dao      Dao    @relation(fields: [daoId], references: [id])
+  daoId    String @map("dao_id")
+  amount   BigInt @default(0) @map("amount")
+  decimals Int    @default(0) @map("decimals")
 
   @@id([id, daoId])
 }
