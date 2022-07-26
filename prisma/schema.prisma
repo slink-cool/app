@@ -37,3 +37,47 @@ model SkillOnUser {
 
   @@id([userId, skillId])
 }
+
+model Voter {
+  id        String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  dao             Dao    @relation(fields: [daoId], references: [id])
+  daoId           String @map("dao_id")
+  totalVotes      Int    @default(0) @map("total_votes")
+  successfulVotes Int    @default(0) @map("successful_votes")
+
+  @@id([id, daoId])
+}
+
+model Holder {
+  id        String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  dao      Dao    @relation(fields: [daoId], references: [id])
+  daoId    String @map("dao_id")
+  amount   BigInt @default(0) @map("amount")
+  decimals Int    @default(0) @map("decimals")
+
+  @@id([id, daoId])
+}
+
+model Dao {
+  id        String   @id
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  symbol           String   @map("symbol")
+  displayName      String   @map("display_name")
+  website          String?  @map("website")
+  twitter          String?  @map("twitter")
+  logoUrl          String?  @map("logo_url")
+  communityTokenId String?  @map("community_token_id")
+  programId        String   @map("program_id")
+  Voter            Voter[]
+  Holder           Holder[]
+
+  @@map("dao")
+}
