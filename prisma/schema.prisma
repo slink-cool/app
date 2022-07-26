@@ -58,7 +58,7 @@ model Holder {
 
   dao    Dao    @relation(fields: [daoId], references: [id])
   daoId  String @map("dao_id")
-  amount String @default("0x0") @map("amount")
+  amount BigInt @default(0) @map("amount")
 
   @@id([id, daoId])
 }
