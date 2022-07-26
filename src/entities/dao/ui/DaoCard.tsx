@@ -1,5 +1,6 @@
 import { EMPTY_ARR } from '@shared/defaults';
 import React from 'react';
+import Image from 'next/image';
 
 interface DaoCardProps {
   title: string;
@@ -7,6 +8,12 @@ interface DaoCardProps {
   avatarUrl?: string;
   tags?: string[];
 }
+
+const LogoFallback: React.FC<{ title: string }> = ({ title }) => (
+  <div className="flex aspect-square items-center justify-center bg-[#D3EDFF]">
+    <span className="text-6xl text-[#819CAF]">{title[0]}</span>
+  </div>
+);
 
 const DaoCard: React.FC<DaoCardProps> = ({
   title,
@@ -16,7 +23,15 @@ const DaoCard: React.FC<DaoCardProps> = ({
 }) => {
   return (
     <div className="flex bg-dark-400 p-6">
-      <div className="mr-4 aspect-square w-[72px] rounded-full bg-teal-300" />
+      <div className="mr-4 aspect-square w-[72px] overflow-hidden rounded-full">
+        {avatarUrl ? (
+          <object data={avatarUrl} type="image/jpeg" className="w-[72px]">
+            <LogoFallback title={title} />
+          </object>
+        ) : (
+          <LogoFallback title={title} />
+        )}
+      </div>
       <div className="flex flex-col justify-between">
         <div className="flex flex-col">
           <span className="text-subtitle-h1">{title}</span>

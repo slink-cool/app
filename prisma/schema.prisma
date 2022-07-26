@@ -36,6 +36,7 @@ model SkillOnUser {
   skillId String @map("skill_id") @db.Uuid
 
   @@id([userId, skillId])
+  @@map("skill_on_user")
 }
 
 model Voter {
@@ -49,6 +50,7 @@ model Voter {
   successfulVotes Int    @default(0) @map("successful_votes")
 
   @@id([id, daoId])
+  @@map("voter")
 }
 
 model Holder {
@@ -62,6 +64,7 @@ model Holder {
   decimals Int    @default(0) @map("decimals")
 
   @@id([id, daoId])
+  @@map("holder")
 }
 
 model Dao {
@@ -70,14 +73,14 @@ model Dao {
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
   symbol           String   @map("symbol")
-  displayName      String   @map("display_name")
+  displayName      String?   @map("display_name")
   website          String?  @map("website")
   twitter          String?  @map("twitter")
   logoUrl          String?  @map("logo_url")
   communityTokenId String?  @map("community_token_id")
   programId        String   @map("program_id")
-  Voter            Voter[]
-  Holder           Holder[]
+  voter            Voter[]
+  holder           Holder[]
 
   @@map("dao")
 }

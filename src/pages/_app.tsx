@@ -44,7 +44,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <div className="flex flex-row bg-[#16131A] text-white">
-      <div className="h-screen w-80 bg-primary">
+      <div className="sticky top-0 h-screen w-80 bg-primary">
         <Sidebar />
       </div>
       <main className="container px-24">

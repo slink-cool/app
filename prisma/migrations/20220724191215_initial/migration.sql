@@ -75,15 +75,15 @@ CREATE TABLE "skill" (
 );
 
 -- CreateTable
-CREATE TABLE "SkillOnUser" (
+CREATE TABLE "skill_on_user" (
     "user_id" TEXT NOT NULL,
     "skill_id" UUID NOT NULL,
 
-    CONSTRAINT "SkillOnUser_pkey" PRIMARY KEY ("user_id","skill_id")
+    CONSTRAINT "skill_on_user_pkey" PRIMARY KEY ("user_id","skill_id")
 );
 
 -- AddForeignKey
-ALTER TABLE "SkillOnUser" ADD CONSTRAINT "SkillOnUser_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "skill_on_user" ADD CONSTRAINT "skill_on_user_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SkillOnUser" ADD CONSTRAINT "SkillOnUser_skill_id_fkey" FOREIGN KEY ("skill_id") REFERENCES "skill"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "skill_on_user" ADD CONSTRAINT "skill_on_user_skill_id_fkey" FOREIGN KEY ("skill_id") REFERENCES "skill"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
