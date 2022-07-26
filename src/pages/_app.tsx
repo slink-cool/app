@@ -8,7 +8,7 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
 import {
   ConnectionProvider,
   useWallet,
-  WalletProvider
+  WalletProvider,
 } from '@solana/wallet-adapter-react';
 import { Sidebar } from '@widgets/Sidebar';
 import { decodeJwt } from 'jose';
@@ -44,8 +44,10 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <div className="flex flex-row bg-[#16131A] text-white">
-      <Sidebar />
-      <main className="container grid-cols-8 px-24">
+      <div className="h-screen w-80 bg-primary">
+        <Sidebar />
+      </div>
+      <main className="container px-24">
         <Component {...pageProps} />
       </main>
     </div>

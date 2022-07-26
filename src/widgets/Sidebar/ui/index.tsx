@@ -9,18 +9,21 @@ import PlusCircleOutline from '@shared/icons/PlusCircleOutline.svg';
 import Link from 'next/link';
 
 const discover = [
-  { Icon: ViewGridOutline, title: 'DAOs' },
+  { Icon: ViewGridOutline, title: 'DAOs', href: '/dao' },
   {
     Icon: BriefcaseOutline,
     title: 'Bounties',
+    href: '/bounties',
   },
   {
     Icon: UserGroupOutline,
     title: 'Profiles',
+    href: '/profiles',
   },
   {
     Icon: ExternalLinkOutline,
     title: 'Wiki',
+    href: '/wiki',
   },
 ];
 
@@ -37,42 +40,42 @@ const forYou = [
 
 const Sidebar = () => {
   return (
-    <div className="h-screen w-80 bg-primary">
-      <div className="flex flex-col py-8 px-6">
-        <Link href="/">
-          <button className="mb-8 flex flex-row items-center">
-            <Logo className="mr-2" />
-            <span className="text-2xl font-bold">delink</span>
-          </button>
-        </Link>
-        <div className="mb-12">
-          <WalletButton />
-        </div>
-        <div className="flex flex-col">
-          <span className="mb-4 text-sm font-bold uppercase text-secondary">
-            Discover
-          </span>
-          <div className="flex flex-col px-5 text-primary">
-            {discover.map(({ title, Icon }) => (
-              <div key={title} className="mb-6 flex flex-row">
+    <div className="flex flex-col bg-primary py-8 px-6">
+      <Link href="/">
+        <button className="mb-8 flex flex-row items-center">
+          <Logo className="mr-2" />
+          <span className="text-2xl font-bold">delink</span>
+        </button>
+      </Link>
+      <div className="mb-12">
+        <WalletButton />
+      </div>
+      <div className="flex flex-col">
+        <span className="mb-4 text-sm font-bold uppercase text-secondary">
+          Discover
+        </span>
+        <div className="flex flex-col px-5 text-primary">
+          {discover.map(({ title, Icon, href }, idx) => (
+            <Link key={idx} href={href}>
+              <a className="mb-6 flex cursor-pointer flex-row">
                 <Icon className="mr-3" />
                 <span className="font-bold">{title}</span>
-              </div>
-            ))}
-          </div>
+              </a>
+            </Link>
+          ))}
         </div>
-        <div className="flex flex-col">
-          <span className="mb-4 text-sm font-bold uppercase text-secondary">
-            for you
-          </span>
-          <div className="flex flex-col px-5 text-primary">
-            {forYou.map(({ title, Icon }) => (
-              <div key={title} className="mb-6 flex flex-row">
-                <Icon className="mr-3" />
-                <span className="font-bold">{title}</span>
-              </div>
-            ))}
-          </div>
+      </div>
+      <div className="flex flex-col">
+        <span className="mb-4 text-sm font-bold uppercase text-secondary">
+          for you
+        </span>
+        <div className="flex flex-col px-5 text-primary">
+          {forYou.map(({ title, Icon }) => (
+            <div key={title} className="mb-6 flex flex-row">
+              <Icon className="mr-3" />
+              <span className="font-bold">{title}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

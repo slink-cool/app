@@ -28,8 +28,8 @@ const ProfilePage: NextPage = () => {
 
   return (
     <>
-      <div className="col-span-8 mt-8 mb-10 h-[348px] overflow-hidden rounded-xl bg-primary">
-        <div className="h-1/2 bg-[#D3EDFF]">
+      <div className="col-span-full mt-8 h-fit overflow-hidden rounded-xl bg-primary pb-8">
+        <div className="h-44 bg-[#D3EDFF]">
           {isOwner && (
             <div className="flex w-full justify-end p-4">
               <Link
@@ -61,7 +61,6 @@ const ProfilePage: NextPage = () => {
           )}
         </div>
       </div>
-      <div className="h-[200px] grid-cols-8 overflow-hidden rounded-xl bg-primary"></div>
     </>
   );
 };

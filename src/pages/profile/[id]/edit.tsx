@@ -40,7 +40,7 @@ const ProfileEditPage: NextPage = () => {
   const isOwner = walletPublicKey.equals(profilePK);
 
   return (
-    <div className="pt-8">
+    <div className="col-span-8 pt-8">
       <div
         className="mb-6 flex cursor-pointer flex-row items-center text-sm text-light-300"
         onClick={router.back}
