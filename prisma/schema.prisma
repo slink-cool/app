@@ -44,27 +44,24 @@ model Voter {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  dao             Dao    @relation(fields: [daoId], references: [id])
-  daoId           String @map("dao_id")
-  totalVotes      Int    @default(0) @map("total_votes")
-  successfulVotes Int    @default(0) @map("successful_votes")
+  dao        Dao    @relation(fields: [daoId], references: [id])
+  daoId      String @map("dao_id")
+  votesCount Int    @default(0) @map("votes_count")
 
   @@id([id, daoId])
   @@map("voter")
 }
 
-model Holder {
+model Member {
   id        String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  dao      Dao    @relation(fields: [daoId], references: [id])
-  daoId    String @map("dao_id")
-  amount   BigInt @default(0) @map("amount")
-  decimals Int    @default(0) @map("decimals")
+  dao   Dao    @relation(fields: [daoId], references: [id])
+  daoId String @map("dao_id")
 
   @@id([id, daoId])
-  @@map("holder")
+  @@map("member")
 }
 
 model Dao {
@@ -72,15 +69,42 @@ model Dao {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  symbol           String   @map("symbol")
-  displayName      String?   @map("display_name")
-  website          String?  @map("website")
-  twitter          String?  @map("twitter")
-  logoUrl          String?  @map("logo_url")
-  communityTokenId String?  @map("community_token_id")
-  programId        String   @map("program_id")
-  voter            Voter[]
-  holder           Holder[]
+  displayName      String    @map("display_name")
+  symbol           String    @map("symbol")
+  programId        String    @map("program_id")
+  communityTokenId String    @map("community_token_id")
+  nftTokenId       String?   @map("nft_token_id")
+  proposalsCount   Int       @default(0) @map("proposals_count")
+  votersCount      Int       @default(0) @map("voters_count")
+  votesCount       Int       @default(0) @map("votes_count")
+  firstVotingAt    DateTime? @map("first_voting_at")
+  website          String?   @map("website")
+  twitter          String?   @map("twitter")
+  logoUrl          String?   @map("logo_url")
+
+  voter  Voter[]
+  member Member[]
 
   @@map("dao")
+}
+
+model Deployer {
+  id        String   @id
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+}
+
+model Job {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  organizationName String   @map("organization_name")
+  title            String   @map("title")
+  salary           String?  @map("salary")
+  location         String   @map("location")
+  tags             String[] @map("tags")
+  descriptionUrl   String   @map("description_url")
+  logoBase64       String?  @map("logo_base64")
+  isRemote         Boolean  @map("is_remote")
 }
