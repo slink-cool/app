@@ -92,6 +92,8 @@ model Deployer {
   id        String   @id
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("deployer")
 }
 
 model Job {
@@ -107,4 +109,21 @@ model Job {
   descriptionUrl   String   @map("description_url")
   logoBase64       String?  @map("logo_base64")
   isRemote         Boolean  @map("is_remote")
+
+  @@map("job")
+}
+
+model NftBuildspace {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  tokenId Int @map("token_id")
+  ownerEthId String @map("owner_eth_id")
+  title String @map("title")
+  description String @map("description")
+  mediaUrl String @map("media_url")
+  courseTitle String @map("course_title")
+
+  @@map("nft_buildspace")
 }
