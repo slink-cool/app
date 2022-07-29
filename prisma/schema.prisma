@@ -49,6 +49,7 @@ model Voter {
   votesCount Int    @default(0) @map("votes_count")
 
   @@id([id, daoId])
+  @@index([id], type: Hash)
   @@map("voter")
 }
 
@@ -61,6 +62,7 @@ model Member {
   daoId String @map("dao_id")
 
   @@id([id, daoId])
+  @@index([id], type: Hash)
   @@map("member")
 }
 
@@ -110,6 +112,7 @@ model Job {
   logoBase64       String?  @map("logo_base64")
   isRemote         Boolean  @map("is_remote")
 
+  @@index([tags], type: Gin)
   @@map("job")
 }
 
@@ -125,6 +128,7 @@ model NftBuildspace {
   mediaUrl    String @map("media_url")
   courseTitle String @map("course_title")
 
+  @@index([ownerEthId], type: Hash)
   @@map("nft_buildspace")
 }
 
@@ -139,5 +143,6 @@ model NftDeveloperDao {
   description  String @map("description")
   image_base64 String @map("image_base64")
 
+  @@index([ownerEthId], type: Hash)
   @@map("nft_developer_dao")
 }
