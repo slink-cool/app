@@ -54,7 +54,7 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-const solanaRpcUrl = 'http://localhost:8899';
+const solanaRpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'http://localhost:8899';
 const wallets = [new PhantomWalletAdapter()];
 
 function Main(props: AppProps) {

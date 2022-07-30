@@ -1,9 +1,13 @@
 import { Avatar } from '@entities/profile';
+import {
+  fetchSnsFavoriteDomain,
+  SWR_PROFILE_FAV_DOMAIN_KEY,
+} from '@entities/profile/api';
 import { fetchUserInfo, SWR_USER_KEY, UserInfo } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import EditIcon from '@shared/icons/Edit.svg';
 import { displayPublicKey } from '@shared/ui';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
@@ -12,19 +16,29 @@ import useSWR from 'swr';
 
 const ProfilePage: NextPage = () => {
   const { query } = useRouter();
+  const { connection } = useConnection();
 
-  const profileId = (query.id as string) || DEFAULT_PUBLIC_KEY_STR;
-  const profilePK = new PublicKey(profileId);
+  const userId = (query.id as string) || DEFAULT_PUBLIC_KEY_STR;
+  const userPK = new PublicKey(userId);
 
   const wallet = useWallet();
 
   const walletPublicKey = wallet.publicKey || PublicKey.default;
-  const isOwner = walletPublicKey.equals(profilePK);
+  const isOwner = walletPublicKey.equals(userPK);
 
   const { data: userInfo, isLoading: isLoadingUserInfo } = useSWR(
-    [SWR_USER_KEY, profileId],
+    [SWR_USER_KEY, userId],
     ([_, profileId]) => fetchUserInfo(profileId)
   );
+
+  const { data: favDomain } = useSWR([SWR_PROFILE_FAV_DOMAIN_KEY, userId], () =>
+    fetchSnsFavoriteDomain(connection, userPK)
+  );
+
+  const favDomainHumanReadable = favDomain ? `${favDomain.reverse}.sol` : null;
+
+  const humanReadableDisplayName =
+    userInfo?.displayName || favDomainHumanReadable || null;
 
   return (
     <>
@@ -47,16 +61,21 @@ const ProfilePage: NextPage = () => {
         </div>
         <div className="flex flex-col px-6">
           <div className="-mt-16 mb-2">
-            <Avatar publicKey={profilePK} />
+            <Avatar placeholder={humanReadableDisplayName || userId} />
           </div>
           <span className="mb-2 text-xl font-bold">
-            {userInfo?.displayName
-              ? userInfo?.displayName
-              : displayPublicKey(profileId)}
+            {humanReadableDisplayName
+              ? humanReadableDisplayName
+              : displayPublicKey(userId)}
           </span>
-          {userInfo?.displayName && (
+          {humanReadableDisplayName && (
             <span className="text-sm text-light-300">
-              {displayPublicKey(profileId)}
+              {displayPublicKey(userId)}
+            </span>
+          )}
+          {favDomain && humanReadableDisplayName !== favDomainHumanReadable && (
+            <span className="text-sm text-light-300">
+              {favDomain.reverse}.sol
             </span>
           )}
         </div>

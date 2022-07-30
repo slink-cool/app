@@ -38,3 +38,5 @@ yarn-error.log*
 # Supabase
 **/supabase/.branches
 **/supabase/.temp
+
+data/
