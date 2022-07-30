@@ -11,7 +11,7 @@ const Home: NextPage = () => {
     if (!wallet.connected || !wallet.publicKey) return;
 
     router.replace({
-      pathname: '/profile/[id]',
+      pathname: '/profiles/[id]',
       query: { id: wallet.publicKey.toString() },
     });
   }, [router, wallet]);

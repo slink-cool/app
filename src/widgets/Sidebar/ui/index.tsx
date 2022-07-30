@@ -9,7 +9,7 @@ import PlusCircleOutline from '@shared/icons/PlusCircleOutline.svg';
 import Link from 'next/link';
 
 const discover = [
-  { Icon: ViewGridOutline, title: 'DAOs', href: '/dao' },
+  { Icon: ViewGridOutline, title: 'DAOs', href: '/daos' },
   {
     Icon: BriefcaseOutline,
     title: 'Bounties',

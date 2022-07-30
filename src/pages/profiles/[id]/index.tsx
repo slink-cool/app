@@ -48,7 +48,7 @@ const ProfilePage: NextPage = () => {
             <div className="flex w-full justify-end p-4">
               <Link
                 href={{
-                  pathname: '/profile/[id]/edit',
+                  pathname: '/profiles/[id]/edit',
                   query,
                 }}
               >
