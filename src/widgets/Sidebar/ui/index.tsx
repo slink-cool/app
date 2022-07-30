@@ -7,6 +7,8 @@ import Logo from '@shared/icons/Logo.svg';
 import NewspaperOutline from '@shared/icons/NewspaperOutline.svg';
 import PlusCircleOutline from '@shared/icons/PlusCircleOutline.svg';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import clsx from 'clsx';
 
 const discover = [
   { Icon: ViewGridOutline, title: 'DAOs', href: '/daos' },
@@ -39,6 +41,8 @@ const forYou = [
 ];
 
 const Sidebar = () => {
+  const { pathname } = useRouter();
+
   return (
     <div className="flex flex-col bg-primary py-8 px-6">
       <Link href="/">
@@ -54,15 +58,23 @@ const Sidebar = () => {
         <span className="mb-4 text-sm font-bold uppercase text-secondary">
           Discover
         </span>
-        <div className="flex flex-col px-5 text-primary">
-          {discover.map(({ title, Icon, href }, idx) => (
-            <Link key={idx} href={href}>
-              <a className="mb-6 flex cursor-pointer flex-row">
-                <Icon className="mr-3" />
-                <span className="font-bold">{title}</span>
-              </a>
-            </Link>
-          ))}
+        <div className="flex flex-col px-5 text-light-400 ">
+          {discover.map(({ title, Icon, href }, idx) => {
+            const active = pathname.includes(href);
+            return (
+              <Link key={idx} href={href}>
+                <a
+                  className={clsx(
+                    'mb-6 flex cursor-pointer flex-row hover:text-light-300',
+                    active && 'text-white'
+                  )}
+                >
+                  <Icon className="mr-3" />
+                  <span className="font-bold">{title}</span>
+                </a>
+              </Link>
+            );
+          })}
         </div>
       </div>
       <div className="flex flex-col">
