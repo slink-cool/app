@@ -3,6 +3,7 @@ import BriefcaseOutline from '@shared/icons/BriefcaseOutline.svg';
 import UserGroupOutline from '@shared/icons/UserGroupOutline.svg';
 import ViewGridOutline from '@shared/icons/ViewGridOutline.svg';
 import ExternalLinkOutline from '@shared/icons/ExternalLinkOutline.svg';
+import Board from '@shared/icons/Board.svg';
 import Logo from '@shared/icons/Logo.svg';
 import NewspaperOutline from '@shared/icons/NewspaperOutline.svg';
 import PlusCircleOutline from '@shared/icons/PlusCircleOutline.svg';
@@ -16,6 +17,11 @@ const discover = [
     Icon: BriefcaseOutline,
     title: 'Bounties',
     href: '/bounties',
+  },
+  {
+    Icon: Board,
+    title: 'Jobs',
+    href: '/jobs',
   },
   {
     Icon: UserGroupOutline,

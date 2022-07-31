@@ -35,9 +35,7 @@ const DaoCard: React.FC<DaoCardProps> = ({
       <div className="flex flex-col justify-between">
         <div className="flex flex-col">
           <span className="text-subtitle-h1">{title}</span>
-          <span className="text-label-medium text-light-400">
-            {description}
-          </span>
+          <span className="text-label text-light-400">{description}</span>
         </div>
         <div className="flex flex-row space-x-1">
           {tags.map((tag, idx) => (

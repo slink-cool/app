@@ -18,9 +18,12 @@ module.exports = {
           500: '#16131A',
           400: '#201D24',
           300: '#2C2830',
-          200: '#39353F'
+          200: '#39353F',
         },
-        accent: '#0094FF',
+        accent: {
+          500: '#0094FF',
+          400: '#43B0FF',
+        },
       },
       backgroundColor: {
         primary: '#201D24',
@@ -38,7 +41,7 @@ module.exports = {
         body: ['1rem', '1.25rem'],
         'label-bold': ['1rem', { lineHeight: '1rem', fontWeight: 700 }],
         'label-semibold': ['0.875rem', { lineHeight: '1rem', fontWeight: 600 }],
-        'label-medium': ['0.875rem', { lineHeight: '1rem', fontWeight: 500 }],
+        label: ['0.875rem', { lineHeight: '1rem', fontWeight: 500 }],
         'caption-bold': ['0.875rem', { lineHeight: '1rem', fontWeight: 700 }],
         'caption-semibold': [
           '0.75rem',

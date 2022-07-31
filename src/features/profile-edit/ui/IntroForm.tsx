@@ -62,7 +62,7 @@ const IntroForm = ({
         </div>
       </div>
       <div className="flex flex-1 justify-between p-6">
-        <Button title="Cancel" kind="secondary" onClick={onCancel} />
+        <Button title="Cancel" variant="secondary" onClick={onCancel} />
         <Button title="Save" onClick={onSave} />
       </div>
     </div>
