@@ -50,7 +50,7 @@ const Sidebar = () => {
   const { pathname } = useRouter();
 
   return (
-    <div className="flex flex-col bg-primary py-8 px-6">
+    <div className="flex flex-col py-8 px-6">
       <Link href="/">
         <button className="mb-8 flex flex-row items-center">
           <Logo className="mr-2" />

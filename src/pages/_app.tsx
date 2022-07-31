@@ -43,8 +43,8 @@ function App({ Component, pageProps }: AppProps) {
   }, [wallet]);
 
   return (
-    <div className="flex flex-row bg-[#16131A] text-white">
-      <div className="sticky top-0 h-screen w-80 bg-primary">
+    <div className="flex flex-row bg-dark-500 text-white">
+      <div className="sticky top-0 h-screen w-80 border-r border-dark-300">
         <Sidebar />
       </div>
       <main className="container px-24">
@@ -54,7 +54,8 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-const solanaRpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'http://localhost:8899';
+const solanaRpcUrl =
+  process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'http://localhost:8899';
 const wallets = [new PhantomWalletAdapter()];
 
 function Main(props: AppProps) {
