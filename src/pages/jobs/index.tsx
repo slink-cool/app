@@ -4,12 +4,18 @@ import { NextPage } from 'next';
 import useSWR from 'swr';
 
 const JobsPage: NextPage = () => {
-  const { data: jobs = EMPTY_ARR } = useSWR(SWR_JOBS_KEY, fetchJobs);
+  const { data: jobs = EMPTY_ARR, isLoading } = useSWR(SWR_JOBS_KEY, fetchJobs);
 
   return (
     <div className="py-16">
       <h1 className="mb-4">Jobs</h1>
       <div className="grid grid-cols-8 gap-6">
+        {isLoading &&
+          [...Array(6)].map((it) => (
+            <div key={it} className="col-span-8 overflow-hidden rounded-xl">
+              <div className="h-[120px] animate-pulse bg-primary" />
+            </div>
+          ))}
         {jobs.map((job) => (
           <div key={job.id} className="col-span-8">
             <JobCard

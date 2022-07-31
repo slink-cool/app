@@ -22,7 +22,7 @@ const DaoCard: React.FC<DaoCardProps> = ({
   tags = EMPTY_ARR,
 }) => {
   return (
-    <div className="flex bg-dark-400 p-6">
+    <div className="flex rounded-xl bg-dark-400 p-6">
       <div className="mr-4 aspect-square w-[72px] overflow-hidden rounded-full">
         {avatarUrl ? (
           <object data={avatarUrl} type="image/jpeg" className="w-[72px]">
@@ -34,7 +34,7 @@ const DaoCard: React.FC<DaoCardProps> = ({
       </div>
       <div className="flex flex-col justify-between">
         <div className="flex flex-col">
-          <span className="text-subtitle-h1">{title}</span>
+          <span className="mb-1 text-subtitle-h1">{title}</span>
           <span className="text-label text-light-400">{description}</span>
         </div>
         <div className="flex flex-row space-x-1">
