@@ -55,7 +55,7 @@ CREATE TABLE "job" (
     "organization_name" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "salary" TEXT,
-    "location" TEXT NOT NULL,
+    "location" TEXT,
     "tags" TEXT[],
     "description_url" TEXT NOT NULL,
     "logo_base64" TEXT,

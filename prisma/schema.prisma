@@ -106,7 +106,7 @@ model Job {
   organizationName String   @map("organization_name")
   title            String   @map("title")
   salary           String?  @map("salary")
-  location         String   @map("location")
+  location         String?  @map("location")
   tags             String[] @map("tags")
   descriptionUrl   String   @map("description_url")
   logoBase64       String?  @map("logo_base64")
