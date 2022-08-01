@@ -55,7 +55,7 @@ const TextInput = ({
           name={id}
           type="text"
           className={clsx(
-            'rounded border-none bg-dark-300 p-3 text-label text-white placeholder:text-light-400 focus:border-dark-200 focus:ring-dark-200',
+            'w-full rounded border-none bg-dark-300 p-3 text-label text-white placeholder:text-light-400 focus:border-dark-200 focus:ring-dark-200',
             className
           )}
           placeholder={placeholder}
