@@ -3,13 +3,13 @@ import {
   fetchSnsFavoriteDomain,
   SWR_PROFILE_FAV_DOMAIN_KEY,
 } from '@entities/profile/api';
-import { fetchUserInfo, SWR_USER_KEY, UserInfo } from '@entities/user';
+import { fetchUserInfo, SWR_USER_KEY } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import EditIcon from '@shared/icons/Edit.svg';
 import { displayPublicKey } from '@shared/ui';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
@@ -41,7 +41,7 @@ const ProfilePage: NextPage = () => {
     userInfo?.displayName || favDomainHumanReadable || null;
 
   return (
-    <>
+    <div className="container grid grid-cols-8 gap-6 px-24">
       <div className="col-span-full mt-8 h-fit overflow-hidden rounded-xl bg-primary pb-8">
         <div className="h-44 bg-[#D3EDFF]">
           {isOwner && (
@@ -52,7 +52,7 @@ const ProfilePage: NextPage = () => {
                   query,
                 }}
               >
-                <button className="rounded-full bg-light-500 p-2 text-accent shadow-md">
+                <button className="text-accent rounded-full bg-light-500 p-2 text-accent-500 shadow-md">
                   <EditIcon />
                 </button>
               </Link>
@@ -80,7 +80,7 @@ const ProfilePage: NextPage = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

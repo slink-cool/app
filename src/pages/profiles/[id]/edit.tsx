@@ -40,54 +40,56 @@ const ProfileEditPage: NextPage = () => {
   const isOwner = walletPublicKey.equals(profilePK);
 
   return (
-    <div className="col-span-8 pt-8">
-      <div
-        className="mb-6 flex cursor-pointer flex-row items-center text-sm text-light-300"
-        onClick={router.back}
-      >
-        <ArrowLeft />
-        Back to profile
+    <div className="container grid grid-cols-8 gap-6 px-24">
+      <div className="col-span-8 pt-8">
+        <div
+          className="mb-6 flex cursor-pointer flex-row items-center text-sm text-light-300"
+          onClick={router.back}
+        >
+          <ArrowLeft />
+          Back to profile
+        </div>
+        <Tab.Group>
+          <Tab.List className="mb-6 flex w-full flex-row space-x-6">
+            <Tab
+              className={({ selected }) =>
+                `flex flex-1 border-b-2 ${
+                  selected ? 'border-accent' : 'border-dark-400 text-light-400'
+                } font-bold outline-none`
+              }
+            >
+              Intro
+            </Tab>
+            <Tab
+              className={({ selected }) =>
+                `flex flex-1 border-b-2 ${
+                  selected ? 'border-accent' : 'border-dark-400 text-light-400'
+                } font-bold outline-none`
+              }
+            >
+              Skills
+            </Tab>
+          </Tab.List>
+          <Tab.Panels>
+            <Tab.Panel>
+              {isLoadingUserInfo ? null : (
+                <IntroForm
+                  userInfo={userInfo}
+                  onCancel={() => {
+                    router.back();
+                  }}
+                  onSave={(info) => {
+                    saveUserInfo(info);
+                  }}
+                />
+              )}
+            </Tab.Panel>
+            <Tab.Panel>
+              <SkillsForm onCancel={() => {}} onSave={() => {}} />
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
       </div>
-      <Tab.Group>
-        <Tab.List className="mb-6 flex w-full flex-row space-x-6">
-          <Tab
-            className={({ selected }) =>
-              `flex flex-1 border-b-2 ${
-                selected ? 'border-accent' : 'border-dark-400 text-light-400'
-              } font-bold outline-none`
-            }
-          >
-            Intro
-          </Tab>
-          <Tab
-            className={({ selected }) =>
-              `flex flex-1 border-b-2 ${
-                selected ? 'border-accent' : 'border-dark-400 text-light-400'
-              } font-bold outline-none`
-            }
-          >
-            Skills
-          </Tab>
-        </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>
-            {isLoadingUserInfo ? null : (
-              <IntroForm
-                userInfo={userInfo}
-                onCancel={() => {
-                  router.back();
-                }}
-                onSave={(info) => {
-                  saveUserInfo(info);
-                }}
-              />
-            )}
-          </Tab.Panel>
-          <Tab.Panel>
-            <SkillsForm onCancel={() => {}} onSave={() => {}} />
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
     </div>
   );
 };

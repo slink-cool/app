@@ -47,7 +47,7 @@ function App({ Component, pageProps }: AppProps) {
       <div className="sticky top-0 h-screen w-80 border-r border-dark-300">
         <Sidebar />
       </div>
-      <main className="container px-24">
+      <main className="w-full">
         <Component {...pageProps} />
       </main>
     </div>

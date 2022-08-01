@@ -9,7 +9,7 @@ interface ButtonProps {
 const ButtonIcon: React.FC<ButtonProps> = ({ children, onClick }) => {
   return (
     <button
-      className="rounded-full bg-light-500 p-2 text-accent shadow-md"
+      className="text-accent rounded-full bg-light-500 p-2 text-accent-500 shadow-md"
       onClick={onClick}
     >
       {children}
