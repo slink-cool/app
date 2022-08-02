@@ -14,7 +14,7 @@ const DaosPage: NextPage = () => {
 
   return (
     <>
-      <div className="container mb-4 border-b border-dark-300 px-24 py-4">
+      <div className="container sticky top-0 mb-4 border-b border-dark-300 bg-dark-500 px-24  py-4">
         <PageHeader title="DAOs" goBack={router.back} />
       </div>
       <div className="container grid grid-cols-8 gap-6 px-24">
