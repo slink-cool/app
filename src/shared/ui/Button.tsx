@@ -18,7 +18,7 @@ const Button = React.forwardRef<any, ButtonProps>(
         href={href}
         onClick={onClick}
         className={clsx(
-          'rounded-md py-3 px-4 text-sm font-semibold leading-4',
+          'transition ease-in-out rounded-md py-3 px-4 text-sm font-semibold leading-4',
           {
             'bg-accent-500 hover:bg-accent-400': variant === 'primary',
             'bg-dark-300 hover:bg-dark-200': variant === 'secondary',
