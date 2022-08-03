@@ -71,7 +71,7 @@ const Sidebar = () => {
               <Link key={idx} href={href}>
                 <a
                   className={clsx(
-                    'mb-6 flex cursor-pointer flex-row hover:text-light-300',
+                    'mb-6 flex cursor-pointer flex-row hover:text-light-300 transition',
                     active && 'text-white'
                   )}
                 >
