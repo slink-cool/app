@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma:prod:migrate": "dotenv -e .env.prod prisma migrate deploy"
+    "prisma:prod:migrate": "dotenv -e .env.production prisma migrate deploy"
   },
   "dependencies": {
     "@bonfida/spl-name-service": "^0.1.44",
