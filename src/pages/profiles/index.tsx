@@ -17,23 +17,22 @@ const ProfilesPage: NextPage = () => {
 
   return (
     <>
-      <div className="container sticky top-0 mb-4 border-b border-dark-300 bg-dark-500 px-24  py-4">
-        <PageHeader
-          title="Profile"
-          goBack={router.back}
-          onGoToClick={(value) =>
-            router.push({ pathname: 'profiles/[id]', query: { id: value } })
+      <PageHeader
+        hasSearch
+        title="Profile"
+        goBack={router.back}
+        onGoToClick={(value) =>
+          router.push({ pathname: 'profiles/[id]', query: { id: value } })
+        }
+        goToValidator={(value) => {
+          try {
+            const key = new PublicKey(value);
+            return Boolean(key);
+          } catch {
+            return false;
           }
-          goToValidator={(value) => {
-            try {
-              const key = new PublicKey(value);
-              return Boolean(key);
-            } catch {
-              return false;
-            }
-          }}
-        />
-      </div>
+        }}
+      />
       <div className="container grid grid-cols-8 gap-6 px-24">
         {isLoading &&
           [...Array(6)].map((it) => (

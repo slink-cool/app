@@ -9,10 +9,7 @@ interface SearchProps {
   goToValidator?: (query: string) => boolean;
 }
 
-const Search: React.FC<SearchProps> = ({
-  onGoToClick,
-  goToValidator,
-}) => {
+const Search: React.FC<SearchProps> = ({ onGoToClick, goToValidator }) => {
   const [query, setQuery] = useState('');
 
   const queryValidForGoto = goToValidator ? goToValidator?.(query) : true;
@@ -26,7 +23,7 @@ const Search: React.FC<SearchProps> = ({
           </div>
           <Combobox.Input
             className={clsx(
-              'w-full rounded border-transparent bg-dark-300 p-3 pl-9 text-label text-white placeholder:text-light-400 focus:border-dark-200 focus:ring-0',
+              'h-10 w-full rounded border-transparent bg-dark-300 p-3 pl-9 text-label text-white placeholder:text-light-400 focus:border-dark-200 focus:ring-0',
               open && 'rounded-b-none border-b-0'
             )}
             placeholder="Search"
@@ -51,25 +48,29 @@ const Search: React.FC<SearchProps> = ({
 
 interface PageHeaderProps extends SearchProps {
   title: string;
+  hasSearch?: boolean;
   goBack?: () => void;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   goBack,
+  hasSearch,
   ...searchProps
 }) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="container sticky top-0 mb-4 flex h-16 items-center justify-between border-b border-dark-300 bg-dark-500 px-24 py-3">
       <div className="flex items-center">
         <button onClick={goBack} className="mr-2 text-light-300">
           <ArrowLeft />
         </button>
         <h1 className="text-title-h1">{title}</h1>
       </div>
-      <div className="w-56">
-        <Search {...searchProps} />
-      </div>
+      {hasSearch && (
+        <div className="w-56">
+          <Search {...searchProps} />
+        </div>
+      )}
     </div>
   );
 };
