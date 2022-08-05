@@ -14,14 +14,12 @@ const ProfilesPage: NextPage = () => {
         <PageHeader
           title="Profile"
           goBack={router.back}
-          goToAvailable
           onGoToClick={(value) =>
             router.push({ pathname: 'profiles/[id]', query: { id: value } })
           }
           goToValidator={(value) => {
             try {
               const key = new PublicKey(value);
-              console.log(key);
               return Boolean(key);
             } catch {
               return false;

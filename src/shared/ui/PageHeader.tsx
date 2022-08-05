@@ -5,13 +5,11 @@ import ArrowLeft from '../icons/ArrowLeft.svg';
 import clsx from 'clsx';
 
 interface SearchProps {
-  goToAvailable?: boolean;
   onGoToClick?: (query: string) => void;
   goToValidator?: (query: string) => boolean;
 }
 
 const Search: React.FC<SearchProps> = ({
-  goToAvailable,
   onGoToClick,
   goToValidator,
 }) => {
@@ -36,10 +34,10 @@ const Search: React.FC<SearchProps> = ({
           />
 
           <Combobox.Options className="absolute z-10 w-full truncate rounded-b border-x border-b border-dark-200 bg-dark-300 p-3">
-            {goToAvailable && query.length > 0 && queryValidForGoto && (
+            {onGoToClick && query.length > 0 && queryValidForGoto && (
               <Combobox.Option
                 value={{ id: null, name: query }}
-                onClick={() => onGoToClick?.(query)}
+                onClick={() => onGoToClick(query)}
               >
                 Go to {query}
               </Combobox.Option>
