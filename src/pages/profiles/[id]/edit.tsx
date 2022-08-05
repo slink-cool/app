@@ -1,9 +1,4 @@
-import {
-  fetchUserInfo,
-  SWR_USER_KEY,
-  updateUserInfo,
-  UserInfo,
-} from '@entities/user';
+import { fetchUser, SWR_USER_KEY, updateUser, User } from '@entities/user';
 import { IntroForm } from '@features/profile-edit';
 import SkillsForm from '@features/profile-edit/ui/SkillsForm';
 import { Tab } from '@headlessui/react';
@@ -25,13 +20,13 @@ const ProfileEditPage: NextPage = () => {
 
   const { data: userInfo = null, isLoading: isLoadingUserInfo } = useSWR(
     [SWR_USER_KEY, profileId],
-    ([_, profileId]) => fetchUserInfo(profileId)
+    ([_, profileId]) => fetchUser(profileId)
   );
 
   const { trigger: saveUserInfo } = useSWRMutation(
     [SWR_USER_KEY, profileId],
-    ([_, profileId], { arg }: { arg: UserInfo }) =>
-      updateUserInfo(profileId, arg)
+    ([_, profileId], { arg }: { arg: Omit<User, 'id'> }) =>
+      updateUser(profileId, arg)
   );
 
   const wallet = useWallet();

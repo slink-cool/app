@@ -1,4 +1,4 @@
-import { UserInfo } from '@entities/user';
+import { User } from '@entities/user';
 import { Button, TextInput } from '@shared/ui';
 import { useState } from 'react';
 

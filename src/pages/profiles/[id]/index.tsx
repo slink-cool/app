@@ -1,9 +1,9 @@
-import { Avatar } from '@entities/profile';
 import {
+  Avatar,
   fetchSnsFavoriteDomain,
-  SWR_PROFILE_FAV_DOMAIN_KEY,
-} from '@entities/profile/api';
-import { fetchUserInfo, SWR_USER_KEY } from '@entities/user';
+  SWR_PROFILE_SNS_FAV_DOMAIN_KEY,
+} from '@entities/profile';
+import { fetchUser, SWR_USER_KEY } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import EditIcon from '@shared/icons/Edit.svg';
 import { displayPublicKey } from '@shared/ui';
@@ -28,10 +28,10 @@ const ProfilePage: NextPage = () => {
 
   const { data: userInfo, isLoading: isLoadingUserInfo } = useSWR(
     [SWR_USER_KEY, userId],
-    ([_, profileId]) => fetchUserInfo(profileId)
+    ([_, profileId]) => fetchUser(profileId)
   );
 
-  const { data: favDomain } = useSWR([SWR_PROFILE_FAV_DOMAIN_KEY, userId], () =>
+  const { data: favDomain } = useSWR([SWR_PROFILE_SNS_FAV_DOMAIN_KEY, userId], () =>
     fetchSnsFavoriteDomain(connection, userPK)
   );
 

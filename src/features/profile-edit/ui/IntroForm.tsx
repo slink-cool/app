@@ -1,13 +1,12 @@
-import { UserInfo } from '@entities/user';
-import { Button, ButtonIcon, TextInput } from '@shared/ui';
-import { PublicKey } from '@solana/web3.js';
-import { useCallback, useState } from 'react';
+import { User } from '@entities/user';
 import CameraIcon from '@shared/icons/Camera.svg';
+import { Button, ButtonIcon, TextInput } from '@shared/ui';
+import { useState } from 'react';
 
 interface IntroFormProps {
-  userInfo: UserInfo | null;
+  userInfo: User | null;
   onCancel: () => void;
-  onSave: (userInfo: UserInfo) => void;
+  onSave: (userInfo: Omit<User, 'id'>) => void;
 }
 
 const IntroForm = ({
