@@ -4,6 +4,7 @@ import { PageHeader } from '@shared/ui';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import Link from 'next/link';
 
 const DaosPage: NextPage = () => {
   const router = useRouter();
@@ -17,19 +18,24 @@ const DaosPage: NextPage = () => {
       <PageHeader title="DAOs" goBack={router.back} />
       <div className="container grid grid-cols-8 gap-6 px-24">
         {isLoading &&
-          [...Array(16)].map((it) => (
-            <div key={it} className="col-span-4 overflow-hidden rounded-xl">
+          [...Array(16)].map((dao) => (
+            <div key={dao} className="col-span-4 overflow-hidden rounded-xl">
               <div className="h-[120px] animate-pulse bg-primary" />
             </div>
           ))}
-        {data.map((it) => (
-          <div key={it.id} className="col-span-4">
-            <DaoCard
-              title={it.displayName || it.symbol}
-              description={it.symbol}
-              avatarUrl={it.logoUrl}
-            />
-          </div>
+        {data.map((dao) => (
+          <Link
+            key={dao.id}
+            href={{ pathname: '/daos/[id]', query: { id: dao.id } }}
+          >
+            <div key={dao.id} className="col-span-4">
+              <DaoCard
+                title={dao.displayName || dao.symbol}
+                description={dao.symbol}
+                avatarUrl={dao.logoUrl}
+              />
+            </div>
+          </Link>
         ))}
       </div>
     </>

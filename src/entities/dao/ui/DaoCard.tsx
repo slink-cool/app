@@ -13,13 +13,9 @@ const LogoFallback: React.FC<{ title: string }> = ({ title }) => (
   </div>
 );
 
-const DaoCard: React.FC<DaoCardProps> = ({
-  title,
-  description,
-  avatarUrl,
-}) => {
+const DaoCard: React.FC<DaoCardProps> = ({ title, description, avatarUrl }) => {
   return (
-    <div className="flex rounded-xl bg-dark-400 p-6">
+    <div className="flex cursor-pointer rounded-xl bg-dark-400 p-6 transition hover:ring-2 hover:ring-dark-300">
       <div className="mr-4 aspect-square w-[72px] overflow-hidden rounded-full">
         {avatarUrl ? (
           <object data={avatarUrl} type="image/jpeg" className="w-[72px]">
