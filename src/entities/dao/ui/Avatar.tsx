@@ -15,7 +15,7 @@ const LogoFallback: React.FC<{ title: string }> = ({ title }) => (
 const Avatar = ({ title, imgUrl }: AvatarProps) => {
   return (
     <>
-      <div className="flex aspect-square w-32 items-center justify-center overflow-hidden rounded-full border-4 border-[#201D24] bg-secondary">
+      <div className="flex aspect-square w-32 items-center justify-center overflow-hidden rounded-full border-4 border-[#201D24] bg-[#D3EDFF]">
         {imgUrl ? (
           <object data={imgUrl} type="image/jpeg" className="w-32">
             <LogoFallback title={title} />
