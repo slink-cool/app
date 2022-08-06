@@ -1,7 +1,7 @@
 import { Combobox } from '@headlessui/react';
 import React, { useState } from 'react';
-import SearchIcon from '../icons/Search.svg';
-import ArrowLeft from '../icons/ArrowLeft.svg';
+import SearchIcon from '@shared/icons/Search.svg';
+import ArrowLeft from '@shared/icons/ArrowLeft.svg';
 import clsx from 'clsx';
 
 interface SearchProps {
@@ -64,7 +64,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         <button onClick={goBack} className="mr-2 text-light-300">
           <ArrowLeft />
         </button>
-        <h1 className="text-title-h1">{title}</h1>
+        <h1 className="text-title-h2">{title}</h1>
       </div>
       {hasSearch && (
         <div className="w-56">

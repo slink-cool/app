@@ -9,6 +9,10 @@ interface Dao {
   symbol: string;
   displayName?: string;
   logoUrl?: string;
+  twitter?: string | null;
+  website?: string;
+  firstVoting?: string;
+  votersCount?: string;
 }
 
 export async function fetchDaosList(): Promise<Dao[]> {
@@ -29,7 +33,9 @@ export async function fetchDaosList(): Promise<Dao[]> {
 export async function fetchDao(id: string, symbol: string): Promise<Dao> {
   const { data } = await supabase
     .from('dao')
-    .select('id, symbol, display_name, logo_url')
+    .select(
+      'id, symbol, display_name, logo_url, twitter, website, first_voting_at, voters_count'
+    )
     .eq('id', id)
     .throwOnError()
     .maybeSingle();
@@ -43,5 +49,9 @@ export async function fetchDao(id: string, symbol: string): Promise<Dao> {
     symbol: data.symbol,
     displayName: data.display_name,
     logoUrl: data.logo_url,
+    twitter: data.twitter ? 'https://twitter.com/' + data.twitter : null,
+    website: data.website,
+    firstVoting: data.first_voting_at,
+    votersCount: data.voters_count,
   };
 }

@@ -1,6 +1,6 @@
 import { User } from '@entities/user';
 import CameraIcon from '@shared/icons/Camera.svg';
-import { Button, ButtonIcon, TextInput } from '@shared/ui';
+import { Button, ButtonEllipse, TextInput } from '@shared/ui';
 import { useState } from 'react';
 
 interface IntroFormProps {
@@ -28,17 +28,17 @@ const IntroForm = ({
     <div className="col-span-8 flex flex-col overflow-hidden rounded-xl bg-primary">
       <div className="h-44 bg-[#D3EDFF]">
         <div className="flex w-full justify-end p-4">
-          <ButtonIcon>
+          <ButtonEllipse>
             <CameraIcon />
-          </ButtonIcon>
+          </ButtonEllipse>
         </div>
       </div>
       <div className="border-b border-b-dark-300 px-6">
         <div className="-mt-16 mb-6">
           <div className="flex aspect-square w-32 items-center justify-center rounded-full border-4 border-[#201D24] bg-[#D3EDFF]">
-            <ButtonIcon>
+            <ButtonEllipse>
               <CameraIcon />
-            </ButtonIcon>
+            </ButtonEllipse>
           </div>
         </div>
         <div className="mb-6">
