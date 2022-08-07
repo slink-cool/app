@@ -15,6 +15,10 @@ import { decodeJwt } from 'jose';
 import type { AppProps } from 'next/app';
 import { parseCookies } from 'nookies';
 import { useEffect } from 'react';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 function App({ Component, pageProps }: AppProps) {
   const wallet = useWallet();

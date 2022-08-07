@@ -30,7 +30,7 @@ export async function fetchDaosList(): Promise<Dao[]> {
   }));
 }
 
-export async function fetchDao(id: string, symbol: string): Promise<Dao> {
+export async function fetchDao(id: string): Promise<Dao> {
   const { data } = await supabase
     .from('dao')
     .select(
@@ -39,10 +39,6 @@ export async function fetchDao(id: string, symbol: string): Promise<Dao> {
     .eq('id', id)
     .throwOnError()
     .maybeSingle();
-
-  if (!data) {
-    return { id, symbol };
-  }
 
   return {
     id,
