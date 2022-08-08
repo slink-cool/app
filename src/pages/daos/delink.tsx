@@ -1,11 +1,17 @@
-import { Avatar } from '@entities/dao';
 import Globe from '@shared/icons/Globe.svg';
 import Twitter from '@shared/icons/Twitter.svg';
 import Discord from '@shared/icons/Discord.svg';
-import { ButtonIcon, PageHeader } from '@shared/ui';
+import Telegram from '@shared/icons/Telegram.svg';
+import {
+  Button,
+  ButtonIcon,
+  PageHeader,
+  Wallpaper,
+  Avatar,
+  Divider,
+} from '@shared/ui';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import Wallpaper from '@shared/ui/Wallpaper';
 
 const DaoPreview: NextPage = () => {
   const router = useRouter();
@@ -15,6 +21,7 @@ const DaoPreview: NextPage = () => {
   );
 
   const socialLinks = [
+    { Icon: Telegram, href: 'https://delink-app.vercel.app/' },
     { Icon: Twitter, href: 'https://twitter.com/delinkprotocol' },
     { Icon: Discord, href: 'https://discord.gg/Q5XUpqvE' },
     { Icon: Globe, href: 'https://delink-app.vercel.app/' },
@@ -23,6 +30,8 @@ const DaoPreview: NextPage = () => {
   const daoDetails = [
     { detailsLabel: 'Created at', detailsData: 'Jul 15, 2022' },
     { detailsLabel: 'Voters', detailsData: '5' },
+    { detailsLabel: 'Token', detailsData: 'DE1INK' },
+    { detailsLabel: 'Payments', detailsData: '$1m' },
   ];
 
   const previewData = [
@@ -33,9 +42,37 @@ const DaoPreview: NextPage = () => {
       wallpaperUrl:
         'https://pbs.twimg.com/profile_banners/1515276048237318145/1659689749/1500x500',
       daoDescription:
-        'Talent platform for Web3 Professionals 🌐 Professional experience just got real (and owned) 🤯 Permissionless, trustless, built over open-protocol 🕺',
+        'Talent platform for Web3 Professionals 🌐 Professional experience just got real (and owned) 🤯',
       symbol: 'de1ink',
       shortName: '@delinkprotocol',
+    },
+  ];
+
+  const bounties = [
+    {
+      bountieTitle: 'Discord Growth Consulting',
+      bountieTag: 'Community',
+      bountieReward: '$1000 USDT',
+    },
+    {
+      bountieTitle: 'Bug Bounty',
+      bountieTag: 'Development',
+      bountieReward: '$5000 USDT',
+    },
+    {
+      bountieTitle: 'Logo Design',
+      bountieTag: 'Design',
+      bountieReward: '$500 USDT',
+    },
+    {
+      bountieTitle: 'Deep Dive',
+      bountieTag: 'Analytics',
+      bountieReward: '$1500 USDT',
+    },
+    {
+      bountieTitle: 'UX/UI Review',
+      bountieTag: 'Design',
+      bountieReward: '$1250 USDT',
     },
   ];
 
@@ -64,7 +101,7 @@ const DaoPreview: NextPage = () => {
               key={idx}
               className="col-span-full mt-4 h-fit overflow-hidden rounded-xl bg-primary pb-8"
             >
-              <Wallpaper imgUrl={wallpaperUrl} />
+              <Wallpaper imgUrl="/img/wallpaper.png" />
               <div className="flex">
                 <div className="flex w-full flex-col px-6">
                   <div className="-mt-16 mb-6 flex">
@@ -77,7 +114,7 @@ const DaoPreview: NextPage = () => {
                           ({ detailsLabel, detailsData }, idx) => (
                             <div
                               key={idx}
-                              className="ml-6 flex w-[112px] flex-col first:ml-0"
+                              className="ml-8 flex w-auto flex-col first:ml-0"
                             >
                               <span className="text-sm text-light-300">
                                 {detailsLabel}
@@ -108,7 +145,7 @@ const DaoPreview: NextPage = () => {
                       </div>
                     </div>
                   </div>
-                  <span className="mb-2 text-xl font-bold">{displayName}</span>
+                  <span className="mb-1 text-xl font-bold">{displayName}</span>
                   <div className="flex items-center text-sm text-light-300">
                     <span>{shortName}</span>
                     <Separator />
@@ -124,7 +161,7 @@ const DaoPreview: NextPage = () => {
                       </div>
                     ))}
                   </div>
-                  <span className="text mt-4 text-light-500">
+                  <span className="mt-4 text-body text-light-500">
                     {daoDescription}
                   </span>
                 </div>
@@ -132,6 +169,30 @@ const DaoPreview: NextPage = () => {
             </div>
           )
         )}
+      </div>
+      <div className="container mt-6 grid grid-cols-8 px-24 pb-6">
+        <span className="text-title-h2 text-light-500">Bounties</span>
+        <div className="col-span-full mt-3 h-fit overflow-hidden rounded-xl bg-primary p-6">
+          {bounties.map(({ bountieTitle, bountieTag, bountieReward }, idx) => (
+            <>
+              <div key={idx} className="flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-subtitle-h2">{bountieTitle}</span>
+                  <div className="mt-3 flex items-center">
+                    <div className="rounded bg-dark-300 bg-dark-300 px-2 py-1 px-2 py-1 text-sm text-light-500">
+                      <span>{bountieTag}</span>
+                    </div>
+                    <div className="ml-2 rounded bg-accent-500 bg-accent-500 px-2 py-1 px-2 py-1 text-sm text-light-500">
+                      <span>{bountieReward}</span>
+                    </div>
+                  </div>
+                </div>
+                <Button variant="secondary" title="Read more" />
+              </div>
+              <Divider />
+            </>
+          ))}
+        </div>
       </div>
     </>
   );
