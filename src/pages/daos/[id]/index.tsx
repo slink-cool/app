@@ -11,7 +11,7 @@ import useSWR from 'swr';
 const DaosPage: NextPage = () => {
   const { query } = useRouter();
   const router = useRouter();
-  
+
   const daoId = (query.id as string) || DEFAULT_PUBLIC_KEY_STR;
 
   const { data: daoInfo, isLoading: isLoadingDaoInfo } = useSWR(
@@ -45,7 +45,7 @@ const DaosPage: NextPage = () => {
                 <div className="self-start">
                   <Avatar
                     imgUrl={daoInfo?.logoUrl}
-                    title={daoInfo?.displayName || daoId}
+                    placeholder={daoInfo?.displayName || daoId}
                   />
                 </div>
                 <div className="mb-1 ml-4 flex w-full justify-between self-end">

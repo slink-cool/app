@@ -31,8 +31,9 @@ const ProfilePage: NextPage = () => {
     ([_, profileId]) => fetchUser(profileId)
   );
 
-  const { data: favDomain } = useSWR([SWR_PROFILE_SNS_FAV_DOMAIN_KEY, userId], () =>
-    fetchSnsFavoriteDomain(connection, userPK)
+  const { data: favDomain } = useSWR(
+    [SWR_PROFILE_SNS_FAV_DOMAIN_KEY, userId],
+    () => fetchSnsFavoriteDomain(connection, userPK)
   );
 
   const favDomainHumanReadable = favDomain ? `${favDomain.reverse}.sol` : null;

@@ -9,7 +9,9 @@ interface DaoCardProps {
 
 const LogoFallback: React.FC<{ title: string }> = ({ title }) => (
   <div className="flex aspect-square items-center justify-center bg-[#D3EDFF]">
-    <span className="text-6xl text-[#819CAF]">{title[0]}</span>
+    <span className="text-4xl font-semibold uppercase text-[#819CAF]">
+      {title[0]}
+    </span>
   </div>
 );
 
