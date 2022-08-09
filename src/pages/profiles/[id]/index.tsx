@@ -80,6 +80,21 @@ const ProfilePage: NextPage = () => {
           )}
         </div>
       </div>
+      {/* skills */}
+      <span className="col-span-full -mb-4 text-title-h2">Skills</span>
+      {['Product Design', 'C++', 'JS'].map((skill) => {
+        return (
+          <div
+            key={skill}
+            className="col-span-4 flex flex-col overflow-hidden rounded-xl bg-primary p-6"
+          >
+            <span className="mb-3 text-subtitle-h2">{skill}</span>
+            <div className="w-fit rounded bg-[#58735452] px-2 py-1 text-caption text-[#6BCC5B]">
+              Confirmed by N users
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
