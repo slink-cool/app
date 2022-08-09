@@ -1,12 +1,11 @@
 import {
-  Avatar,
   fetchSnsFavoriteDomain,
   SWR_PROFILE_SNS_FAV_DOMAIN_KEY,
 } from '@entities/profile';
 import { fetchUser, SWR_USER_KEY } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import EditIcon from '@shared/icons/Edit.svg';
-import { displayPublicKey } from '@shared/ui';
+import { displayPublicKey, Avatar } from '@shared/ui';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { NextPage } from 'next';
@@ -31,8 +30,9 @@ const ProfilePage: NextPage = () => {
     ([_, profileId]) => fetchUser(profileId)
   );
 
-  const { data: favDomain } = useSWR([SWR_PROFILE_SNS_FAV_DOMAIN_KEY, userId], () =>
-    fetchSnsFavoriteDomain(connection, userPK)
+  const { data: favDomain } = useSWR(
+    [SWR_PROFILE_SNS_FAV_DOMAIN_KEY, userId],
+    () => fetchSnsFavoriteDomain(connection, userPK)
   );
 
   const favDomainHumanReadable = favDomain ? `${favDomain.reverse}.sol` : null;
