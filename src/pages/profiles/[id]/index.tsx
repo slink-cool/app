@@ -61,7 +61,10 @@ const ProfilePage: NextPage = () => {
         </div>
         <div className="flex flex-col px-6">
           <div className="-mt-16 mb-2">
-            <Avatar placeholder={humanReadableDisplayName || userId} />
+            <Avatar
+              avatarSize="lg"
+              placeholder={humanReadableDisplayName || userId}
+            />
           </div>
           <span className="mb-2 text-xl font-bold">
             {humanReadableDisplayName

@@ -106,7 +106,11 @@ const DaoPreview: NextPage = () => {
                 <div className="flex w-full flex-col px-6">
                   <div className="-mt-16 mb-6 flex">
                     <div className="self-start">
-                      <Avatar imgUrl={imgUrl} placeholder={displayName} />
+                      <Avatar
+                        avatarSize="lg"
+                        imgUrl={imgUrl}
+                        placeholder={displayName}
+                      />
                     </div>
                     <div className="mb-1 ml-4 flex w-full justify-between self-end">
                       <div className="flex">

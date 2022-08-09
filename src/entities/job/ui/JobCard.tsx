@@ -1,5 +1,6 @@
-import { Button } from '@shared/ui';
+import { Avatar, Button } from '@shared/ui';
 import Link from 'next/link';
+import React from 'react';
 
 interface JobCardProps {
   title: string;
@@ -25,12 +26,12 @@ const JobCard: React.FC<JobCardProps> = ({
   return (
     <div className="flex flex-row items-center justify-between rounded-xl bg-primary p-6">
       <div className="flex flex-row">
-        <div className="mr-4 flex aspect-square h-[72px] items-center justify-center overflow-hidden rounded-full bg-slate-400">
-          {logoBase64 ? (
-            <img src={logoBase64} />
-          ) : (
-            <div className="text-6xl text-[#819CAF]">{company[0]}</div>
-          )}
+        <div className="mr-4">
+          <Avatar
+            avatarSize="md"
+            imgUrl={logoBase64}
+            placeholder={company[0]}
+          />
         </div>
         <div className="flex flex-col justify-between">
           <div className="flex flex-col">

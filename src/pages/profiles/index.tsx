@@ -50,7 +50,10 @@ const ProfilesPage: NextPage = () => {
           >
             <div className="col-span-8 flex cursor-pointer overflow-hidden rounded-xl bg-primary p-6 hover:ring-2 hover:ring-dark-300">
               <div className="mr-4">
-                <Avatar placeholder={user.displayName || user.id} />
+                <Avatar
+                  avatarSize="md"
+                  placeholder={user.displayName || user.id}
+                />
               </div>
               <div className="flex">
                 <span className="text-subtitle-h1 text-light-500">
