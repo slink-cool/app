@@ -20,13 +20,10 @@ const DaosPage: NextPage = () => {
   );
 
   const humanCreationDate = () => {
-    if (daoInfo?.firstVoting) {
-      return dayjs.utc(daoInfo?.firstVoting).format('MMM DD, YYYY');
-    }
-
-    if (!daoInfo?.firstVoting) {
+    if (!daoInfo || !daoInfo.firstVoting) {
       return null;
     }
+    return dayjs.utc(daoInfo.firstVoting).format('MMM DD, YYYY');
   };
 
   const socialLinks = [
@@ -56,23 +53,24 @@ const DaosPage: NextPage = () => {
                 </div>
                 <div className="mb-1 ml-4 flex w-full justify-between self-end">
                   <div className="flex">
-                    {daoDetails.map(({ detailsLabel, detailsData }, idx) => (
-                      <>
-                        {detailsData !== null && (
-                          <div
-                            key={idx}
-                            className="ml-8 flex w-auto flex-col first:ml-0"
-                          >
-                            <span className="text-sm text-light-300">
-                              {detailsLabel}
-                            </span>
-                            <span className="mt-1 text-subtitle-h2 text-light-500">
-                              {detailsData}
-                            </span>
-                          </div>
-                        )}
-                      </>
-                    ))}
+                    {daoDetails.map(({ detailsLabel, detailsData }, idx) => {
+                      if (detailsData === null || detailsData === undefined) {
+                        return null;
+                      }
+                      return (
+                        <div
+                          key={idx}
+                          className="ml-8 flex w-auto flex-col first:ml-0"
+                        >
+                          <span className="text-sm text-light-300">
+                            {detailsLabel}
+                          </span>
+                          <span className="mt-1 text-subtitle-h2 text-light-500">
+                            {detailsData}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                   <div className="flex self-start">
                     {socialLinks.map(({ Icon, href }, idx) => (
