@@ -19,9 +19,15 @@ const DaosPage: NextPage = () => {
     ([_, daoId]) => fetchDao(daoId)
   );
 
-  const humanCreationDate = dayjs
-    .utc(daoInfo?.firstVoting)
-    .format('MMM DD, YYYY');
+  const humanCreationDate = () => {
+    if (daoInfo?.firstVoting) {
+      return dayjs.utc(daoInfo?.firstVoting).format('MMM DD, YYYY');
+    }
+
+    if (!daoInfo?.firstVoting) {
+      return null;
+    }
+  };
 
   const socialLinks = [
     { Icon: Twitter, href: daoInfo?.twitter },
@@ -29,7 +35,7 @@ const DaosPage: NextPage = () => {
   ];
 
   const daoDetails = [
-    { detailsLabel: 'Created at', detailsData: humanCreationDate },
+    { detailsLabel: 'Created at', detailsData: humanCreationDate() },
     { detailsLabel: 'Voters', detailsData: daoInfo?.votersCount },
   ];
 
@@ -51,17 +57,21 @@ const DaosPage: NextPage = () => {
                 <div className="mb-1 ml-4 flex w-full justify-between self-end">
                   <div className="flex">
                     {daoDetails.map(({ detailsLabel, detailsData }, idx) => (
-                      <div
-                        key={idx}
-                        className="ml-8 flex w-auto flex-col first:ml-0"
-                      >
-                        <span className="text-sm text-light-300">
-                          {detailsLabel}
-                        </span>
-                        <span className="mt-1 text-subtitle-h2 text-light-500">
-                          {detailsData}
-                        </span>
-                      </div>
+                      <>
+                        {detailsData !== null && (
+                          <div
+                            key={idx}
+                            className="ml-8 flex w-auto flex-col first:ml-0"
+                          >
+                            <span className="text-sm text-light-300">
+                              {detailsLabel}
+                            </span>
+                            <span className="mt-1 text-subtitle-h2 text-light-500">
+                              {detailsData}
+                            </span>
+                          </div>
+                        )}
+                      </>
                     ))}
                   </div>
                   <div className="flex self-start">
