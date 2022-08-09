@@ -3,6 +3,7 @@ import { IntroForm } from '@features/profile-edit';
 import SkillsForm from '@features/profile-edit/ui/SkillsForm';
 import { Tab } from '@headlessui/react';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
+import { strToBytes } from '@shared/encode-utils';
 import ArrowLeft from '@shared/icons/ArrowLeft.svg';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
@@ -53,34 +54,23 @@ const ProfileEditPage: NextPage = () => {
                 } font-bold outline-none`
               }
             >
-              Intro
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                `flex flex-1 border-b-2 ${
-                  selected ? 'border-accent' : 'border-dark-400 text-light-400'
-                } font-bold outline-none`
-              }
-            >
               Skills
             </Tab>
           </Tab.List>
           <Tab.Panels>
             <Tab.Panel>
-              {isLoadingUserInfo ? null : (
-                <IntroForm
-                  userInfo={userInfo}
-                  onCancel={() => {
-                    router.back();
-                  }}
-                  onSave={(info) => {
-                    saveUserInfo(info);
-                  }}
-                />
-              )}
-            </Tab.Panel>
-            <Tab.Panel>
-              <SkillsForm onCancel={() => {}} onSave={() => {}} />
+              <SkillsForm
+                onCancel={() => {
+                  router.back();
+                }}
+                onSave={async (skills) => {
+                  const msg =
+                    'I confirm that I own the following skills: \n' +
+                    skills.join('\n');
+                  await wallet.signMessage?.(strToBytes(msg));
+                  router.back();
+                }}
+              />
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

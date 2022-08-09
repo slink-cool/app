@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 interface SkillsFormProps {
   onCancel: () => void;
-  onSave: () => void;
+  onSave: (skills: string[]) => void;
 }
 
 const SkillsForm = ({ onCancel, onSave }: SkillsFormProps) => {
@@ -47,7 +47,7 @@ const SkillsForm = ({ onCancel, onSave }: SkillsFormProps) => {
       </div>
       <div className="flex flex-1 justify-between p-6">
         <Button title="Cancel" variant="secondary" onClick={onCancel} />
-        <Button title="Save" onClick={onSave} />
+        <Button title="Save" onClick={() => onSave(skills)} />
       </div>
     </div>
   );
