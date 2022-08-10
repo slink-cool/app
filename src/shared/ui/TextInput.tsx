@@ -33,7 +33,7 @@ const TextInput = ({
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
-        onEnterPress?.(e.target.value);
+        onEnterPress?.(e.currentTarget.value);
       }
     },
     [onEnterPress]
