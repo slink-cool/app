@@ -55,7 +55,7 @@ const BountieCard: React.FC<BountieCardProps> = ({
               </span>
             </div>
             <div className="w-fit rounded bg-accent-500 px-2 py-1">
-              <span className="text-label text-light-500">{bountieReward}</span>
+              <span className="text-label text-dark-500">{bountieReward}</span>
             </div>
           </div>
         </div>
