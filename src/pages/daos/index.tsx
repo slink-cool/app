@@ -23,14 +23,12 @@ const DaosPage: NextPage = () => {
               <div className="h-[120px] animate-pulse bg-primary" />
             </div>
           ))}
-        <Link href={{ pathname: '/daos/delink' }}>
+        <Link href={{ pathname: '/daos/slink' }}>
           <div className="col-span-4">
             <DaoCard
-              title={'DELINK (🕸) Solana Summer Hackathon'}
+              title={'SLINK (🕸) Solana Summer Hackathon'}
               description={'TALENT PLATFORM FOR WEB3 PROFESSIONALS 🌐'}
-              avatarUrl={
-                'https://pbs.twimg.com/profile_images/1555477660989591552/MV_ZptiR_400x400.png'
-              }
+              avatarUrl="/img/avatar.png"
             />
           </div>
         </Link>

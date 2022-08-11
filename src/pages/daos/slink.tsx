@@ -78,7 +78,7 @@ const DaoPreview: NextPage = () => {
     <>
       <PageHeader
         goBack={router.back}
-        title={'DELINK (🕸) Solana Summer Hackathon'}
+        title={'SLINK (🕸) Solana Summer Hackathon'}
       />
       <div className="container grid grid-cols-8 gap-6 px-24">
         {previewData.map(
