@@ -93,6 +93,7 @@ const DaoPreview: NextPage = () => {
                   <div className="-mt-16 mb-6 flex">
                     <div className="self-start">
                       <Avatar
+                        avatarSize="lg"
                         imgUrl="/img/avatar.png"
                         placeholder={displayName}
                       />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Avatar } from '@shared/ui';
 
 interface DaoCardProps {
   title: string;
@@ -7,25 +8,11 @@ interface DaoCardProps {
   tags?: string[];
 }
 
-const LogoFallback: React.FC<{ title: string }> = ({ title }) => (
-  <div className="flex aspect-square items-center justify-center bg-[#D3EDFF]">
-    <span className="text-4xl font-semibold uppercase text-[#819CAF]">
-      {title[0]}
-    </span>
-  </div>
-);
-
 const DaoCard: React.FC<DaoCardProps> = ({ title, description, avatarUrl }) => {
   return (
     <div className="flex cursor-pointer rounded-xl bg-dark-400 p-6 transition hover:ring-2 hover:ring-dark-300">
-      <div className="mr-4 aspect-square w-[72px] overflow-hidden rounded-full">
-        {avatarUrl ? (
-          <object data={avatarUrl} type="image/jpeg" className="w-[72px]">
-            <LogoFallback title={title} />
-          </object>
-        ) : (
-          <LogoFallback title={title} />
-        )}
+      <div className="mr-4">
+        <Avatar avatarSize="md" imgUrl={avatarUrl} placeholder={title} />
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex flex-col">
