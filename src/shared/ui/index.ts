@@ -6,4 +6,5 @@ export { default as PageHeader } from './PageHeader';
 export { default as Avatar } from './Avatar';
 export { default as Wallpaper } from './Wallpaper';
 export { default as Divider } from './Divider';
+export { default as DotSeparator } from './DotSeparator';
 export * from './utils';
