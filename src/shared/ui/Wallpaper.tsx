@@ -2,9 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import EditIcon from '@shared/icons/Edit.svg';
 import { useRouter } from 'next/router';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { PublicKey } from '@solana/web3.js';
-import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import { ButtonEllipse } from '@shared/ui/index';
 
 interface WallpaperProps {
@@ -12,16 +9,8 @@ interface WallpaperProps {
   isOwner?: boolean;
 }
 
-const Wallpaper = ({ imgUrl }: WallpaperProps) => {
+const Wallpaper = ({ imgUrl, isOwner }: WallpaperProps) => {
   const { query } = useRouter();
-
-  const wallet = useWallet();
-
-  const userId = (query.id as string) || DEFAULT_PUBLIC_KEY_STR;
-  const userPK = new PublicKey(userId);
-  const walletPublicKey = wallet.publicKey || PublicKey.default;
-
-  const isOwner = walletPublicKey.equals(userPK);
 
   return (
     <>

@@ -5,7 +5,7 @@ import {
 import { fetchUser, SWR_USER_KEY } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import { displayPublicKey, Avatar, Wallpaper, Button } from '@shared/ui';
-import { useConnection } from '@solana/wallet-adapter-react';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -20,6 +20,11 @@ const ProfilePage: NextPage = () => {
 
   const userId = (query.id as string) || DEFAULT_PUBLIC_KEY_STR;
   const userPK = new PublicKey(userId);
+
+  const wallet = useWallet();
+  const walletPublicKey = wallet.publicKey || PublicKey.default;
+
+  const isOwner = walletPublicKey.equals(userPK);
 
   const { data: userInfo, isLoading: isLoadingUserInfo } = useSWR(
     [SWR_USER_KEY, userId],
@@ -93,7 +98,7 @@ const ProfilePage: NextPage = () => {
     <div className="container grid grid-cols-8 gap-6 px-24">
       <div className="col-span-full mt-8 h-fit overflow-hidden rounded-xl bg-primary pb-8">
         <div className="h-44">
-          <Wallpaper />
+          <Wallpaper isOwner={isOwner} />
         </div>
         <div className="flex flex-col px-6">
           <div className="-mt-16 mb-6">
