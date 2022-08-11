@@ -9,16 +9,13 @@ import {
   Wallpaper,
   Avatar,
   Divider,
+  DotSeparator,
 } from '@shared/ui';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 const DaoPreview: NextPage = () => {
   const router = useRouter();
-
-  const Separator = () => (
-    <span className="mx-2 inline-block h-1 w-1 rounded-full bg-current" />
-  );
 
   const socialLinks = [
     { Icon: Telegram, href: 'https://delink-app.vercel.app/' },
@@ -80,7 +77,7 @@ const DaoPreview: NextPage = () => {
         goBack={router.back}
         title={'SLINK (🕸) Solana Summer Hackathon'}
       />
-      <div className="container grid grid-cols-8 gap-6 px-24">
+      <div className="container grid grid-cols-8 gap-8 px-24">
         {previewData.map(
           ({ displayName, daoDescription, symbol, shortName }, idx) => (
             <div
@@ -138,7 +135,7 @@ const DaoPreview: NextPage = () => {
                   <span className="mb-1 text-xl font-bold">{displayName}</span>
                   <div className="flex items-center text-sm text-light-300">
                     <span>{shortName}</span>
-                    <Separator />
+                    <DotSeparator />
                     <span>{symbol}</span>
                   </div>
                   <div className="mt-6 flex">

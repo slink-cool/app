@@ -1,6 +1,7 @@
 import { Avatar, Button } from '@shared/ui';
 import Link from 'next/link';
 import React from 'react';
+import DotSeparator from '@shared/ui/DotSeparator';
 
 interface JobCardProps {
   title: string;
@@ -10,10 +11,6 @@ interface JobCardProps {
   salary?: string;
   logoBase64?: string;
 }
-
-const Separator = () => (
-  <span className="mx-2 inline-block h-1 w-1 rounded-full bg-current" />
-);
 
 const JobCard: React.FC<JobCardProps> = ({
   title,
@@ -43,7 +40,7 @@ const JobCard: React.FC<JobCardProps> = ({
             <span>{location}</span>
             {salary && (
               <>
-                <Separator />
+                <DotSeparator />
                 <span>{salary}</span>
               </>
             )}
