@@ -21,8 +21,8 @@ module.exports = {
           200: '#39353F',
         },
         accent: {
-          500: '#0094FF',
-          400: '#43B0FF',
+          500: '#41FFBB',
+          400: '#76FFCE',
         },
       },
       backgroundColor: {

@@ -53,8 +53,10 @@ const Sidebar = () => {
     <div className="flex flex-col py-8 px-6">
       <Link href="/">
         <button className="mb-8 flex flex-row items-center">
-          <Logo className="mr-2" />
-          <span className="text-2xl font-bold">delink</span>
+          <div className="transition hover:text-accent-500">
+            <Logo className="mr-2" />
+          </div>
+          <span className="text-2xl font-medium">slink</span>
         </button>
       </Link>
       <div className="mb-12">
@@ -71,7 +73,7 @@ const Sidebar = () => {
               <Link key={idx} href={href}>
                 <a
                   className={clsx(
-                    'mb-6 flex cursor-pointer flex-row hover:text-light-300 transition',
+                    'mb-6 flex cursor-pointer flex-row transition hover:text-light-300',
                     active && 'text-white'
                   )}
                 >

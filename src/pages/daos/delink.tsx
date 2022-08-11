@@ -30,21 +30,17 @@ const DaoPreview: NextPage = () => {
   const daoDetails = [
     { detailsLabel: 'Created at', detailsData: 'Jul 15, 2022' },
     { detailsLabel: 'Voters', detailsData: '5' },
-    { detailsLabel: 'Token', detailsData: 'DE1INK' },
+    { detailsLabel: 'Token', detailsData: 'S1INK' },
     { detailsLabel: 'Payments', detailsData: '$1m' },
   ];
 
   const previewData = [
     {
-      displayName: 'DELINK (🕸) Solana Summer Hackathon',
-      imgUrl:
-        'https://pbs.twimg.com/profile_images/1555477660989591552/MV_ZptiR_400x400.png',
-      wallpaperUrl:
-        'https://pbs.twimg.com/profile_banners/1515276048237318145/1659689749/1500x500',
+      displayName: 'SLINK (🕸) Solana Summer Hackathon',
       daoDescription:
         'Talent platform for Web3 Professionals 🌐 Professional experience just got real (and owned) 🤯',
-      symbol: 'de1ink',
-      shortName: '@delinkprotocol',
+      symbol: 's1ink',
+      shortName: '@slinkcool',
     },
   ];
 
@@ -86,17 +82,7 @@ const DaoPreview: NextPage = () => {
       />
       <div className="container grid grid-cols-8 gap-6 px-24">
         {previewData.map(
-          (
-            {
-              displayName,
-              imgUrl,
-              wallpaperUrl,
-              daoDescription,
-              symbol,
-              shortName,
-            },
-            idx
-          ) => (
+          ({ displayName, daoDescription, symbol, shortName }, idx) => (
             <div
               key={idx}
               className="col-span-full mt-4 h-fit overflow-hidden rounded-xl bg-primary pb-8"
@@ -108,7 +94,7 @@ const DaoPreview: NextPage = () => {
                     <div className="self-start">
                       <Avatar
                         avatarSize="lg"
-                        imgUrl={imgUrl}
+                        imgUrl="/img/avatar.png"
                         placeholder={displayName}
                       />
                     </div>
@@ -186,7 +172,7 @@ const DaoPreview: NextPage = () => {
                     <div className="rounded bg-dark-300 bg-dark-300 px-2 py-1 px-2 py-1 text-sm text-light-500">
                       <span>{bountieTag}</span>
                     </div>
-                    <div className="ml-2 rounded bg-accent-500 bg-accent-500 px-2 py-1 px-2 py-1 text-sm text-light-500">
+                    <div className="ml-2 rounded bg-accent-500 bg-accent-500 px-2 py-1 px-2 py-1 text-sm text-dark-500">
                       <span>{bountieReward}</span>
                     </div>
                   </div>
