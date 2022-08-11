@@ -20,7 +20,8 @@ const Button = React.forwardRef<any, ButtonProps>(
         className={clsx(
           'rounded-md py-3 px-4 text-sm font-semibold leading-4 transition',
           {
-            'bg-accent-500 hover:bg-accent-400': variant === 'primary',
+            'bg-accent-500 text-dark-500 hover:bg-accent-400':
+              variant === 'primary',
             'bg-dark-300 hover:bg-dark-200': variant === 'secondary',
           }
         )}
