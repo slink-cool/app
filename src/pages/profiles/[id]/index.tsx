@@ -123,7 +123,7 @@ const ProfilePage: NextPage = () => {
         goBack={router.back}
       />
       <div className="container grid grid-cols-8 gap-8 px-24">
-        <div className="col-span-full mt-8 h-fit overflow-hidden rounded-xl bg-primary pb-8">
+        <div className="col-span-full mt-2 h-fit overflow-hidden rounded-xl bg-primary pb-8">
           <div className="h-44">
             <Wallpaper isOwner={isOwner} />
           </div>
