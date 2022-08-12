@@ -169,7 +169,7 @@ const DaoPreview: NextPage = () => {
                     <div className="rounded bg-dark-300 bg-dark-300 px-2 py-1 px-2 py-1 text-sm text-light-500">
                       <span>{bountieTag}</span>
                     </div>
-                    <div className="ml-2 rounded bg-accent-500 bg-accent-500 px-2 py-1 px-2 py-1 text-sm text-dark-500">
+                    <div className="ml-2 rounded bg-dark-300 px-2 py-1 px-2 py-1 text-sm text-light-500">
                       <span>{bountieReward}</span>
                     </div>
                   </div>
