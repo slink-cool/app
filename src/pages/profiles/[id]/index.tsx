@@ -1,31 +1,33 @@
+import { BountieCard } from '@entities/bounties';
 import {
   fetchSnsFavoriteDomain,
+  fetchUserSkills,
+  SWR_PROFILE_SKILLS_KEY,
   SWR_PROFILE_SNS_FAV_DOMAIN_KEY,
 } from '@entities/profile';
+import DaoCard from '@entities/profile/ui/DaoCard';
+import HighlightCard from '@entities/profile/ui/HighlightCard';
 import { fetchUser, SWR_USER_KEY } from '@entities/user';
-import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
+import { DEFAULT_PUBLIC_KEY_STR, EMPTY_ARR } from '@shared/defaults';
+import Discord from '@shared/icons/Discord.svg';
+import Globe from '@shared/icons/Globe.svg';
+import Telegram from '@shared/icons/Telegram.svg';
+import Twitter from '@shared/icons/Twitter.svg';
 import {
-  displayPublicKey,
   Avatar,
-  Wallpaper,
   Button,
   ButtonIcon,
+  displayPublicKey,
   DotSeparator,
+  Wallpaper,
 } from '@shared/ui';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import ConnectIllustration from '/public/illustrations/connect.svg';
-import { BountieCard } from '@entities/bounties';
-import Link from 'next/link';
-import DaoCard from '@entities/profile/ui/DaoCard';
-import Telegram from '@shared/icons/Telegram.svg';
-import Twitter from '@shared/icons/Twitter.svg';
-import Discord from '@shared/icons/Discord.svg';
-import Globe from '@shared/icons/Globe.svg';
-import HighlightCard from '@entities/profile/ui/HighlightCard';
 
 const ProfilePage: NextPage = () => {
   const { query } = useRouter();
@@ -158,6 +160,11 @@ const ProfilePage: NextPage = () => {
   ];
 
   const userTags = [{ tag: 'Designer' }, { tag: 'Developer' }];
+
+  const { data: userSkills = EMPTY_ARR } = useSWR(
+    [SWR_PROFILE_SKILLS_KEY, userId],
+    ([_, userId]) => fetchUserSkills(userId)
+  );
 
   const favDomainHumanReadable = favDomain ? `${favDomain.reverse}.sol` : null;
 
@@ -343,13 +350,13 @@ const ProfilePage: NextPage = () => {
 
       {/* skills */}
       <span className="col-span-full -mb-6 text-title-h2">Skills</span>
-      {['Product Design', 'C++', 'JS'].map((skill) => {
+      {userSkills.map((skill) => {
         return (
           <div
-            key={skill}
+            key={skill.id}
             className="col-span-4 flex flex-col overflow-hidden rounded-xl bg-primary p-6"
           >
-            <span className="mb-3 text-subtitle-h2">{skill}</span>
+            <span className="mb-3 text-subtitle-h2">{skill.title}</span>
             <div className="w-fit rounded bg-[#58735452] px-2 py-1 text-caption text-[#6BCC5B]">
               Confirmed by N users
             </div>

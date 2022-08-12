@@ -5,3 +5,4 @@ export const DEFAULT_PUBLIC_KEY_STR = DEFAULT_PUBLIC_KEY.toString();
 
 export const EMPTY_ARR = Object.freeze([]);
 export const EMPTY_OBJ = Object.freeze({});
+export const NOOP = () => {};
