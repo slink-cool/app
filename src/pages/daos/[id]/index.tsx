@@ -34,6 +34,7 @@ const DaosPage: NextPage = () => {
   const daoDetails = [
     { detailsLabel: 'Created at', detailsData: humanCreationDate() },
     { detailsLabel: 'Voters', detailsData: daoInfo?.votersCount },
+    { detailsLabel: 'Token', detailsData: daoInfo?.symbol },
   ];
 
   return (

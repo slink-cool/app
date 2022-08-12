@@ -48,7 +48,9 @@ const JobCard: React.FC<JobCardProps> = ({
         </div>
       </div>
       <Link href={sourceUrl} passHref>
-        <Button title="Read more" variant="secondary" as="a" />
+        <a target="_blank">
+          <Button title="Read more" variant="secondary" as="a" />
+        </a>
       </Link>
     </div>
   );
