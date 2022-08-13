@@ -32,7 +32,7 @@ const Combobox: React.FC<ComboboxProps> = ({
   const queryValidForGoto = goToValidator ? goToValidator?.(query) : true;
 
   const filteredOptions = options.filter((option) =>
-    option.title?.includes(query)
+    option.title?.toLowerCase().includes(query.trim().toLowerCase())
   );
 
   return (
