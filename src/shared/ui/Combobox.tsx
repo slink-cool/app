@@ -31,6 +31,10 @@ const Combobox: React.FC<ComboboxProps> = ({
 
   const queryValidForGoto = goToValidator ? goToValidator?.(query) : true;
 
+  const filteredOptions = options.filter((option) =>
+    option.title?.includes(query)
+  );
+
   return (
     <BaseCombobox value={value} onChange={(option) => onChange(option!.id)}>
       {({ open }) => (
@@ -50,18 +54,23 @@ const Combobox: React.FC<ComboboxProps> = ({
             onChange={(event) => setQuery(event.target.value)}
           />
 
-          <BaseCombobox.Options className="absolute z-10 w-full truncate rounded-b border-x border-b border-dark-200 bg-dark-300 p-3">
+          <BaseCombobox.Options className="absolute z-10 w-full truncate rounded-b border-x border-b border-dark-200 bg-dark-300">
             <>
               {onGoToClick && query.length > 0 && queryValidForGoto && (
                 <BaseCombobox.Option
+                  className="cursor-pointer p-3 hover:bg-dark-200"
                   value={{ id: 'goto' }}
                   onClick={() => onGoToClick(query)}
                 >
                   Go to {query}
                 </BaseCombobox.Option>
               )}
-              {options.map((option) => (
-                <BaseCombobox.Option key={option.id} value={option}>
+              {filteredOptions.map((option) => (
+                <BaseCombobox.Option
+                  className="cursor-pointer p-3 hover:bg-dark-200"
+                  key={option.id}
+                  value={option}
+                >
                   {option.title || option.id}
                 </BaseCombobox.Option>
               ))}
