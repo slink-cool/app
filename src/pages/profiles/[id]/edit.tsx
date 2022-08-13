@@ -1,5 +1,4 @@
 import { fetchUser, SWR_USER_KEY, updateUser, User } from '@entities/user';
-import { IntroForm } from '@features/profile-edit';
 import SkillsForm from '@features/profile-edit/ui/SkillsForm';
 import { Tab } from '@headlessui/react';
 import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
@@ -60,13 +59,15 @@ const ProfileEditPage: NextPage = () => {
           <Tab.Panels>
             <Tab.Panel>
               <SkillsForm
+                userId={profileId}
                 onCancel={() => {
                   router.back();
                 }}
                 onSave={async (skills) => {
+                  const skillTitles = skills.map((skill) => skill.title);
                   const msg =
                     'I confirm that I own the following skills: \n' +
-                    skills.join('\n');
+                    skillTitles.join('\n');
                   await wallet.signMessage?.(strToBytes(msg));
                   router.back();
                 }}

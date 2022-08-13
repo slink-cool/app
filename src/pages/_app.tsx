@@ -49,7 +49,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <div className="flex flex-row bg-dark-500 text-white">
       <div className="sticky top-0 h-screen w-80 border-r border-dark-300">
-        <Sidebar />
+        <Sidebar userId={wallet.publicKey} />
       </div>
       <main className="w-full">
         <Component {...pageProps} />

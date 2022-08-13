@@ -12,26 +12,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { ButtonIcon } from '@shared/ui';
-
-const discover = [
-  { Icon: User, title: 'My Profile', href: '/' },
-  { Icon: ViewGridOutline, title: 'DAOs', href: '/daos' },
-  {
-    Icon: BriefcaseOutline,
-    title: 'Bounties',
-    href: '/bounties',
-  },
-  {
-    Icon: Board,
-    title: 'Jobs',
-    href: '/jobs',
-  },
-  {
-    Icon: UserGroupOutline,
-    title: 'Profiles',
-    href: '/profiles',
-  },
-];
+import { useMemo } from 'react';
+import { supabase } from '@shared/supabase';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { PublicKey } from '@solana/web3.js';
+import { EMPTY_ARR } from '@shared/defaults';
 
 const forYou = [
   {
@@ -45,8 +30,39 @@ const social = [
   { Icon: Discord, href: 'https://discord.gg/Q5XUpqvE' },
 ];
 
-const Sidebar = () => {
-  const { pathname } = useRouter();
+interface SidebarProps {
+  userId?: PublicKey | null;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ userId }) => {
+  const { asPath } = useRouter();
+
+  const userIdStr = userId?.toString();
+
+  const discover = useMemo(
+    () => [
+      ...(userIdStr
+        ? [{ Icon: User, title: 'My Profile', href: `/profiles/${userIdStr}` }]
+        : EMPTY_ARR),
+      { Icon: ViewGridOutline, title: 'DAOs', href: '/daos' },
+      {
+        Icon: BriefcaseOutline,
+        title: 'Bounties',
+        href: '/bounties',
+      },
+      {
+        Icon: Board,
+        title: 'Jobs',
+        href: '/jobs',
+      },
+      {
+        Icon: UserGroupOutline,
+        title: 'Profiles',
+        href: '/profiles',
+      },
+    ],
+    [userIdStr]
+  );
 
   return (
     <div className="flex h-full flex-col py-8 px-6">
@@ -69,7 +85,7 @@ const Sidebar = () => {
             </span>
             <div className="flex flex-col px-5 text-light-400 ">
               {discover.map(({ title, Icon, href }, idx) => {
-                const active = pathname.includes(href);
+                const active = asPath === href;
                 return (
                   <Link key={idx} href={href}>
                     <a
