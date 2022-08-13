@@ -5,8 +5,6 @@ import {
   SWR_PROFILE_SKILLS_KEY,
   SWR_PROFILE_SNS_FAV_DOMAIN_KEY,
 } from '@entities/profile';
-import DaoCard from '@entities/profile/ui/DaoCard';
-import HighlightCard from '@entities/profile/ui/HighlightCard';
 import { fetchUser, SWR_USER_KEY } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR, EMPTY_ARR } from '@shared/defaults';
 import Discord from '@shared/icons/Discord.svg';
@@ -29,12 +27,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import ConnectIllustration from '/public/illustrations/connect.svg';
-import { BountieCard } from '@entities/bounties';
-import Link from 'next/link';
-import Telegram from '@shared/icons/Telegram.svg';
-import Twitter from '@shared/icons/Twitter.svg';
-import Discord from '@shared/icons/Discord.svg';
-import Globe from '@shared/icons/Globe.svg';
 
 const ProfilePage: NextPage = () => {
   const { query } = useRouter();
@@ -137,7 +129,7 @@ const ProfilePage: NextPage = () => {
         title={humanReadableDisplayName || userId}
         goBack={router.back}
       />
-      <div className="container grid grid-cols-8 gap-8 px-24">
+      <div className="container grid grid-cols-8 gap-8 px-24 pb-6">
         <div className="col-span-full mt-2 h-fit overflow-hidden rounded-xl bg-primary pb-8">
           <div className="h-44">
             <Wallpaper isOwner={isOwner} />
@@ -271,17 +263,18 @@ const ProfilePage: NextPage = () => {
           )
         )}
 
-      {/* skills */}
-      <span className="col-span-full -mb-6 text-title-h2">Skills</span>
-      {userSkills.map((skill) => {
-        return (
-          <div
-            key={skill.id}
-            className="col-span-4 flex flex-col overflow-hidden rounded-xl bg-primary p-6"
-          >
-            <span className="mb-3 text-subtitle-h2">{skill.title}</span>
-            <div className="w-fit rounded bg-[#58735452] px-2 py-1 text-caption text-[#6BCC5B]">
-              Confirmed by N users
+        {/* skills */}
+        <span className="col-span-full -mb-6 text-title-h2">Skills</span>
+        {userSkills.map((skill) => {
+          return (
+            <div
+              key={skill.id}
+              className="col-span-4 flex flex-col overflow-hidden rounded-xl bg-primary p-6"
+            >
+              <span className="mb-3 text-subtitle-h2">{skill.title}</span>
+              <div className="w-fit rounded bg-[#58735452] px-2 py-1 text-caption text-[#6BCC5B]">
+                Confirmed by N users
+              </div>
             </div>
           );
         })}
