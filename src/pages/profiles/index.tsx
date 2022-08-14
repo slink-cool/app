@@ -11,6 +11,7 @@ import Telegram from '@shared/icons/Telegram.svg';
 import Twitter from '@shared/icons/Twitter.svg';
 import Discord from '@shared/icons/Discord.svg';
 import Globe from '@shared/icons/Globe.svg';
+import Head from 'next/head';
 
 const ProfilesPage: NextPage = () => {
   const router = useRouter();
@@ -34,6 +35,9 @@ const ProfilesPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Slink — Profiles</title>
+      </Head>
       <PageHeader
         hasSearch
         title="Profiles"

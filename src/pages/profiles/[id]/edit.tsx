@@ -7,6 +7,7 @@ import ArrowLeft from '@shared/icons/ArrowLeft.svg';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
@@ -35,48 +36,55 @@ const ProfileEditPage: NextPage = () => {
   const isOwner = walletPublicKey.equals(profilePK);
 
   return (
-    <div className="container grid grid-cols-8 gap-6 px-24">
-      <div className="col-span-8 pt-8">
-        <div
-          className="mb-6 flex cursor-pointer flex-row items-center text-sm text-light-300"
-          onClick={router.back}
-        >
-          <ArrowLeft />
-          Back to profile
+    <>
+      <Head>
+        <title>Slink — Profile — Edit</title>
+      </Head>
+      <div className="container grid grid-cols-8 gap-6 px-24">
+        <div className="col-span-8 pt-8">
+          <div
+            className="mb-6 flex cursor-pointer flex-row items-center text-sm text-light-300"
+            onClick={router.back}
+          >
+            <ArrowLeft />
+            Back to profile
+          </div>
+          <Tab.Group>
+            <Tab.List className="mb-6 flex w-full flex-row space-x-6">
+              <Tab
+                className={({ selected }) =>
+                  `flex flex-1 border-b-2 ${
+                    selected
+                      ? 'border-accent'
+                      : 'border-dark-400 text-light-400'
+                  } font-bold outline-none`
+                }
+              >
+                Skills
+              </Tab>
+            </Tab.List>
+            <Tab.Panels>
+              <Tab.Panel>
+                <SkillsForm
+                  userId={profileId}
+                  onCancel={() => {
+                    router.back();
+                  }}
+                  onSave={async (skills) => {
+                    const skillTitles = skills.map((skill) => skill.title);
+                    const msg =
+                      'I confirm that I own the following skills: \n' +
+                      skillTitles.join('\n');
+                    await wallet.signMessage?.(strToBytes(msg));
+                    router.back();
+                  }}
+                />
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
         </div>
-        <Tab.Group>
-          <Tab.List className="mb-6 flex w-full flex-row space-x-6">
-            <Tab
-              className={({ selected }) =>
-                `flex flex-1 border-b-2 ${
-                  selected ? 'border-accent' : 'border-dark-400 text-light-400'
-                } font-bold outline-none`
-              }
-            >
-              Skills
-            </Tab>
-          </Tab.List>
-          <Tab.Panels>
-            <Tab.Panel>
-              <SkillsForm
-                userId={profileId}
-                onCancel={() => {
-                  router.back();
-                }}
-                onSave={async (skills) => {
-                  const skillTitles = skills.map((skill) => skill.title);
-                  const msg =
-                    'I confirm that I own the following skills: \n' +
-                    skillTitles.join('\n');
-                  await wallet.signMessage?.(strToBytes(msg));
-                  router.back();
-                }}
-              />
-            </Tab.Panel>
-          </Tab.Panels>
-        </Tab.Group>
       </div>
-    </div>
+    </>
   );
 };
 

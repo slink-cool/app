@@ -2,6 +2,7 @@ import { fetchJobs, JobCard, SWR_JOBS_KEY } from '@entities/job';
 import { EMPTY_ARR } from '@shared/defaults';
 import { PageHeader } from '@shared/ui';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
@@ -11,6 +12,9 @@ const JobsPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Slink — Jobs</title>
+      </Head>
       <PageHeader title="Jobs" goBack={router.back} />
       <div className="container grid grid-cols-8 gap-6 px-24">
         {isLoading &&

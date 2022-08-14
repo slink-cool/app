@@ -1,51 +1,26 @@
-import {
-  fetchSnsFavoriteDomain,
-  SWR_PROFILE_SNS_FAV_DOMAIN_KEY,
-} from '@entities/profile';
-import { fetchUser, SWR_USER_KEY } from '@entities/user';
-import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
-import {
-  displayPublicKey,
-  Avatar,
-  Wallpaper,
-  ButtonIcon,
-  DotSeparator,
-  PageHeader,
-} from '@shared/ui';
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { PublicKey } from '@solana/web3.js';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
 import DaoCard from '@entities/profile/ui/DaoCard';
-import Telegram from '@shared/icons/Telegram.svg';
-import Twitter from '@shared/icons/Twitter.svg';
+import HighlightCard from '@entities/profile/ui/HighlightCard';
+import { DEFAULT_PUBLIC_KEY_STR } from '@shared/defaults';
 import Discord from '@shared/icons/Discord.svg';
 import Globe from '@shared/icons/Globe.svg';
-import HighlightCard from '@entities/profile/ui/HighlightCard';
+import Telegram from '@shared/icons/Telegram.svg';
+import Twitter from '@shared/icons/Twitter.svg';
+import {
+  Avatar,
+  ButtonIcon,
+  displayPublicKey,
+  DotSeparator,
+  PageHeader,
+  Wallpaper,
+} from '@shared/ui';
+import { NextPage } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const ProfilePage: NextPage = () => {
-  const { query } = useRouter();
-  const { connection } = useConnection();
   const router = useRouter();
 
-  const userId = (query.id as string) || DEFAULT_PUBLIC_KEY_STR;
-  const userPK = new PublicKey(userId);
-
-  const wallet = useWallet();
-  const walletPublicKey = wallet.publicKey || PublicKey.default;
-
-  const isOwner = walletPublicKey.equals(userPK);
-
-  const { data: userInfo, isLoading: isLoadingUserInfo } = useSWR(
-    [SWR_USER_KEY, userId],
-    ([_, profileId]) => fetchUser(profileId)
-  );
-
-  const { data: favDomain } = useSWR(
-    [SWR_PROFILE_SNS_FAV_DOMAIN_KEY, userId],
-    () => fetchSnsFavoriteDomain(connection, userPK)
-  );
+  const userId = DEFAULT_PUBLIC_KEY_STR;
 
   const daos = [
     {
@@ -109,25 +84,23 @@ const ProfilePage: NextPage = () => {
     { tag: 'Growth Manager' },
   ];
 
-  const favDomainHumanReadable = favDomain ? `${favDomain.reverse}.sol` : null;
-
-  const humanReadableDisplayName =
-    userInfo?.displayName || favDomainHumanReadable || null;
-
   return (
     <>
+      <Head>
+        <title>Slink — Profile — vladkooklev.sol</title>
+      </Head>
       <PageHeader title="vladkooklev.sol" goBack={router.back} />
       <div className="container grid grid-cols-8 gap-8 px-24">
         <div className="col-span-full mt-2 h-fit overflow-hidden rounded-xl bg-primary pb-8">
           <div className="h-44">
-            <Wallpaper isOwner={isOwner} imgUrl="/img/userWallpaper.png" />
+            <Wallpaper isOwner={false} imgUrl="/img/userWallpaper.png" />
           </div>
           <div className="flex flex-col px-6">
             <div className="-mt-16 mb-6 flex">
               <div className="self-start">
                 <Avatar
                   avatarSize="lg"
-                  placeholder={humanReadableDisplayName || userId}
+                  placeholder="V"
                   imgUrl="/img/userAvatar.png"
                 />
               </div>

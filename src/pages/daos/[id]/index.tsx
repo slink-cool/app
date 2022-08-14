@@ -5,6 +5,7 @@ import Twitter from '@shared/icons/Twitter.svg';
 import { ButtonIcon, PageHeader, Avatar, Wallpaper } from '@shared/ui';
 import dayjs from 'dayjs';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
@@ -39,6 +40,9 @@ const DaosPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Slink — DAO — {daoInfo?.displayName || daoInfo?.symbol}</title>
+      </Head>
       <PageHeader goBack={router.back} title={daoInfo?.displayName || ''} />
       <div className="container grid grid-cols-8 gap-6 px-24">
         <div className="col-span-full mt-4 h-fit overflow-hidden rounded-xl bg-primary pb-8">

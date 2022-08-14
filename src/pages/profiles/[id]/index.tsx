@@ -23,6 +23,7 @@ import {
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
@@ -125,6 +126,9 @@ const ProfilePage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Slink — Profile</title>
+      </Head>
       <PageHeader
         title={humanReadableDisplayName || userId}
         goBack={router.back}

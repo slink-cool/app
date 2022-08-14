@@ -13,6 +13,7 @@ import {
 } from '@shared/ui';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const DaoPreview: NextPage = () => {
   const router = useRouter();
@@ -73,6 +74,9 @@ const DaoPreview: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Slink — DAO — SLINK</title>
+      </Head>
       <PageHeader
         goBack={router.back}
         title={'SLINK (🕸) Solana Summer Hackathon'}

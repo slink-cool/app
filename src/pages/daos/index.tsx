@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const DaosPage: NextPage = () => {
   const router = useRouter();
@@ -15,6 +16,9 @@ const DaosPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Slink — DAOs</title>
+      </Head>
       <PageHeader title="DAOs" goBack={router.back} />
       <div className="container grid grid-cols-8 gap-6 px-24">
         {isLoading &&

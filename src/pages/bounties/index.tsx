@@ -1,6 +1,7 @@
 import { BountieCard } from '@entities/bounties';
 import { PageHeader } from '@shared/ui';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const BountiesPage: NextPage = () => {
@@ -8,6 +9,9 @@ const BountiesPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Slink — Bounties</title>
+      </Head>
       <PageHeader title="Bounties" goBack={router.back} />
       <div className="container grid grid-cols-8 gap-6 px-24">
         <div className="col-span-2">
