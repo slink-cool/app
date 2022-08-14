@@ -1,5 +1,6 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -16,7 +17,13 @@ const Home: NextPage = () => {
     });
   }, [router, wallet]);
 
-  return null;
+  return (
+    <>
+      <Head>
+        <title>Slink</title>
+      </Head>
+    </>
+  );
 };
 
 export default Home;
