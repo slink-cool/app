@@ -19,6 +19,7 @@ export async function fetchDaosList(): Promise<Dao[]> {
   const res = await supabase
     .from('dao')
     .select('id, symbol, display_name, logo_url')
+    .order('voters_count', { ascending: false })
     .throwOnError();
   const data = res.data || EMPTY_ARR;
 
