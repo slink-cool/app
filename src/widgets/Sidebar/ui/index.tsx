@@ -67,11 +67,11 @@ const Sidebar: React.FC<SidebarProps> = ({ userId }) => {
   return (
     <div className="flex h-full flex-col py-8 px-6">
       <Link href="/">
-        <button className="mb-8 flex flex-row items-center">
-          <div className="transition hover:text-accent-500">
+        <button className="mb-8 flex flex-row items-center hover:text-accent-500">
+          <div className="transition">
             <Logo className="mr-2" />
           </div>
-          <span className="text-2xl font-medium">slink</span>
+          <span className="text-2xl font-medium text-white">slink</span>
         </button>
       </Link>
       <div className="mb-12">
