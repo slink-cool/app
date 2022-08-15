@@ -17,10 +17,12 @@ import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { useRouter } from 'next/router';
 
 dayjs.extend(utc);
 
 function App({ Component, pageProps }: AppProps) {
+  const { pathname } = useRouter();
   const wallet = useWallet();
 
   const [isWalletSigning, setIsWalletSigning] = useState(false);
@@ -30,6 +32,7 @@ function App({ Component, pageProps }: AppProps) {
       !wallet.connected ||
       !wallet.publicKey ||
       !wallet.signMessage ||
+      pathname === '/' ||
       isWalletSigning
     )
       return;
@@ -57,7 +60,7 @@ function App({ Component, pageProps }: AppProps) {
     } finally {
       setIsWalletSigning(false);
     }
-  }, [wallet, isWalletSigning]);
+  }, [wallet, isWalletSigning, pathname]);
 
   return (
     <div className="flex flex-row bg-dark-500 text-white">
