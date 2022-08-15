@@ -46,7 +46,7 @@ const SkillsForm = ({ userId, onCancel, onSave }: SkillsFormProps) => {
   };
 
   return (
-    <div className="col-span-8 flex flex-col overflow-hidden rounded-xl bg-primary">
+    <div className="col-span-8 flex flex-col rounded-xl bg-primary">
       <div className="p-6">
         <div className="max-w-md">
           <Combobox
