@@ -11,7 +11,9 @@ import Telegram from '@shared/icons/Telegram.svg';
 import Twitter from '@shared/icons/Twitter.svg';
 import Discord from '@shared/icons/Discord.svg';
 import Globe from '@shared/icons/Globe.svg';
+import Award from '@shared/icons/Award.svg';
 import Head from 'next/head';
+import clsx from 'clsx';
 
 const ProfilesPage: NextPage = () => {
   const router = useRouter();
@@ -28,6 +30,7 @@ const ProfilesPage: NextPage = () => {
   ];
 
   const userTags = [
+    { tag: 'DAO Member', Icon: Award, Badge: true },
     { tag: 'Founder' },
     { tag: 'Product Manager' },
     { tag: 'Growth Manager' },
@@ -82,11 +85,22 @@ const ProfilesPage: NextPage = () => {
                   vladkooklev.sol
                 </span>
                 <div className="mt-3 flex">
-                  {userTags.map(({ tag }, idx) => (
+                  {userTags.map(({ tag, Icon, Badge }, idx) => (
                     <div
                       key={idx}
-                      className="mr-2 rounded bg-dark-300 px-2 py-1 text-sm text-light-500"
+                      className={clsx(
+                        'mr-2 flex items-center rounded px-2 py-1 text-sm text-light-500',
+                        {
+                          'bg-dark-300': !Badge,
+                          'border border-dark-200': Badge,
+                        }
+                      )}
                     >
+                      {Icon && (
+                        <div className="mr-1 text-accent-500">
+                          <Icon />
+                        </div>
+                      )}
                       <span>{tag}</span>
                     </div>
                   ))}

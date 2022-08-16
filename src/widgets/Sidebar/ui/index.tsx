@@ -13,8 +13,6 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { ButtonIcon } from '@shared/ui';
 import { useMemo } from 'react';
-import { supabase } from '@shared/supabase';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { EMPTY_ARR } from '@shared/defaults';
 
@@ -27,7 +25,7 @@ const forYou = [
 
 const social = [
   { Icon: Twitter, href: 'https://twitter.com/slinkcool' },
-  { Icon: Discord, href: 'https://discord.gg/Q5XUpqvE' },
+  { Icon: Discord, href: 'https://discord.gg/emv7K6mEaC' },
 ];
 
 interface SidebarProps {

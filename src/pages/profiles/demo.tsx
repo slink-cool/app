@@ -5,6 +5,7 @@ import Discord from '@shared/icons/Discord.svg';
 import Globe from '@shared/icons/Globe.svg';
 import Telegram from '@shared/icons/Telegram.svg';
 import Twitter from '@shared/icons/Twitter.svg';
+import Award from '@shared/icons/Award.svg';
 import {
   Avatar,
   ButtonIcon,
@@ -16,6 +17,7 @@ import {
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import clsx from 'clsx';
 
 const ProfilePage: NextPage = () => {
   const router = useRouter();
@@ -41,10 +43,10 @@ const ProfilePage: NextPage = () => {
   ];
 
   const socialLinks = [
-    { Icon: Telegram, href: 'https://delink-app.vercel.app/' },
-    { Icon: Twitter, href: 'https://twitter.com/delinkprotocol' },
-    { Icon: Discord, href: 'https://discord.gg/Q5XUpqvE' },
-    { Icon: Globe, href: 'https://delink-app.vercel.app/' },
+    { Icon: Telegram, href: 'https://t.me/vladkooklev' },
+    { Icon: Twitter, href: 'https://twitter.com/vladkooklev' },
+    { Icon: Discord, href: 'https://discord.gg/emv7K6mEaC' },
+    { Icon: Globe, href: 'https://app.slink.cool/profiles/demo' },
   ];
 
   const highlights = [
@@ -79,6 +81,7 @@ const ProfilePage: NextPage = () => {
   ];
 
   const userTags = [
+    { tag: 'DAO Member', Icon: Award, Badge: true },
     { tag: 'Founder' },
     { tag: 'Product Manager' },
     { tag: 'Growth Manager' },
@@ -131,11 +134,19 @@ const ProfilePage: NextPage = () => {
               </div>
             </div>
             <div className="mt-6 flex">
-              {userTags.map(({ tag }, idx) => (
+              {userTags.map(({ tag, Icon, Badge }, idx) => (
                 <div
                   key={idx}
-                  className="mr-2 rounded bg-dark-300 px-2 py-1 text-sm text-light-500"
+                  className={clsx(
+                    'mr-2 flex items-center rounded px-2 py-1 text-sm text-light-500',
+                    { 'bg-dark-300': !Badge, 'border border-dark-200': Badge }
+                  )}
                 >
+                  {Icon && (
+                    <div className="mr-1 text-accent-500">
+                      <Icon />
+                    </div>
+                  )}
                   <span>{tag}</span>
                 </div>
               ))}
