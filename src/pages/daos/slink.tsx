@@ -19,10 +19,10 @@ const DaoPreview: NextPage = () => {
   const router = useRouter();
 
   const socialLinks = [
-    { Icon: Telegram, href: 'https://delink-app.vercel.app/' },
-    { Icon: Twitter, href: 'https://twitter.com/delinkprotocol' },
-    { Icon: Discord, href: 'https://discord.gg/Q5XUpqvE' },
-    { Icon: Globe, href: 'https://delink-app.vercel.app/' },
+    { Icon: Telegram, href: '#' },
+    { Icon: Twitter, href: 'https://twitter.com/slinkcool' },
+    { Icon: Discord, href: 'https://discord.gg/emv7K6mEaC' },
+    { Icon: Globe, href: 'https://slink.cool/' },
   ];
 
   const daoDetails = [

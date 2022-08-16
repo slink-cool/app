@@ -195,10 +195,6 @@ const ProfilePage: NextPage = () => {
                 </>
               ))}
             </div>
-            <span className="mt-4 text-body text-light-500">
-              Head of Design at @slinkcool – Helping a launching a million DAOs
-              🚀
-            </span>
           </div>
         </div>
         {!userSkills.length && (
@@ -270,7 +266,9 @@ const ProfilePage: NextPage = () => {
         )}
 
         {/* skills */}
-        <span className="col-span-full -mb-6 text-title-h2">Skills</span>
+        {Boolean(userSkills.length) && (
+          <span className="col-span-full -mb-6 text-title-h2">Skills</span>
+        )}
         {userSkills.map((skill) => {
           return (
             <div
