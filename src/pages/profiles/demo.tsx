@@ -152,7 +152,7 @@ const ProfilePage: NextPage = () => {
               ))}
             </div>
             <span className="mt-4 text-body text-light-500">
-              Head of Product at @slinkcool – Helping a launching a million DAOs
+              Head of Product at @slinkcool – Helping in launching a million DAOs
               🚀
             </span>
           </div>

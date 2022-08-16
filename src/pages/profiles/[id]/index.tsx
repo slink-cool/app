@@ -201,7 +201,7 @@ const ProfilePage: NextPage = () => {
           <div className="col-span-full flex h-fit items-center justify-between overflow-hidden rounded-xl bg-primary pl-6">
             <div className="flex w-[40%] flex-col">
               <span className="text-title-h2 text-light-500">
-                Looks like you are newbie
+                Looks like you are a newbie
               </span>
               <span className="mt-4 text-body text-light-400">
                 Fill out your profile so DAOs communities can learn more about
