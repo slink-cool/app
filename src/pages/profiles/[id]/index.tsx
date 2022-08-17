@@ -194,7 +194,7 @@ const ProfilePage: NextPage = () => {
             </div>
           </div>
         </div>
-        {!userSkills.length && (
+        {isOwner && !userSkills.length && (
           <div className="col-span-full flex h-fit items-center justify-between overflow-hidden rounded-xl bg-primary pl-6">
             <div className="flex w-[40%] flex-col">
               <span className="text-title-h2 text-light-500">
