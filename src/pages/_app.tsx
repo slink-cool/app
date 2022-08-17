@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 
 dayjs.extend(utc);
 
