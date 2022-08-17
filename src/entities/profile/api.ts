@@ -10,6 +10,8 @@ export const SWR_AVAILABLE_SKILLS_KEY = 'profile/available-skills';
 
 export const SWR_PROFILE_SKILLS_KEY = 'profile/skills';
 
+export const SWR_PROFILE_ACHIEVEMNTS_KEY = 'profile/achievements';
+
 export function fetchSnsFavoriteDomain(
   connection: Connection,
   owner: PublicKey
@@ -66,4 +68,26 @@ export async function removeSkill(
     .delete()
     .eq('user_id', userId)
     .eq('skill_id', skillId);
+}
+
+export async function fetchAchievements(userId: string): Promise<{
+  daoMember: boolean;
+  deployer: boolean;
+  daoVoter: boolean;
+}> {
+  const [member, deployer, voter] = await Promise.allSettled([
+    supabase.from('member').select('id').eq('id', userId),
+    supabase.from('deployer').select('id').eq('id', userId),
+    supabase.from('voter').select('id').eq('id', userId),
+  ]);
+
+  console.log('achievemets', { member, deployer, voter });
+
+  return {
+    daoMember:
+      member.status === 'fulfilled' && Boolean(member.value.data?.length),
+    deployer:
+      deployer.status === 'fulfilled' && Boolean(deployer.value.data?.length),
+    daoVoter: voter.status === 'fulfilled' && Boolean(voter.value.data?.length),
+  };
 }

@@ -1,10 +1,13 @@
 import { BountieCard } from '@entities/bounties';
 import {
+  fetchAchievements,
   fetchSnsFavoriteDomain,
   fetchUserSkills,
+  SWR_PROFILE_ACHIEVEMNTS_KEY,
   SWR_PROFILE_SKILLS_KEY,
   SWR_PROFILE_SNS_FAV_DOMAIN_KEY,
 } from '@entities/profile';
+import Badge from '@entities/profile/ui/Badge';
 import { fetchUser, SWR_USER_KEY } from '@entities/user';
 import { DEFAULT_PUBLIC_KEY_STR, EMPTY_ARR } from '@shared/defaults';
 import Discord from '@shared/icons/Discord.svg';
@@ -50,6 +53,11 @@ const ProfilePage: NextPage = () => {
   const { data: favDomain } = useSWR(
     [SWR_PROFILE_SNS_FAV_DOMAIN_KEY, userId],
     () => fetchSnsFavoriteDomain(connection, userPK)
+  );
+
+  const { data: achievements } = useSWR(
+    [SWR_PROFILE_ACHIEVEMNTS_KEY, userId],
+    ([_, profileId]) => fetchAchievements(profileId)
   );
 
   const socialLinks = [
@@ -111,8 +119,6 @@ const ProfilePage: NextPage = () => {
       sourceUrl: 'https://superteam.fun/bounties/coindcx-deep-dive-bounty',
     },
   ];
-
-  const userTags = [{ tag: '' }, { tag: '' }];
 
   const { data: userSkills = EMPTY_ARR } = useSWR(
     [SWR_PROFILE_SKILLS_KEY, userId],
@@ -181,19 +187,10 @@ const ProfilePage: NextPage = () => {
                   </div>
                 )}
             </div>
-            <div className="flex">
-              {userTags.map(({ tag }, idx) => (
-                <>
-                  {tag && (
-                    <div
-                      key={idx}
-                      className="mt-6 mr-2 rounded bg-dark-300 px-2 py-1 text-sm text-light-500"
-                    >
-                      <span>{tag}</span>
-                    </div>
-                  )}
-                </>
-              ))}
+            <div className="mt-6 flex">
+              {achievements?.daoMember && <Badge title="DAO Member" />}
+              {achievements?.daoVoter && <Badge title="DAO Voter" />}
+              {achievements?.deployer && <Badge title="Mainnet Deployer" />}
             </div>
           </div>
         </div>
